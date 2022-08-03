@@ -24,7 +24,7 @@ const InterfazInicio = () => {
           <title>Inicio</title>
       </Helmet>
     <Header>
-        <Titulo> N O T I C I A S </Titulo> 
+        <Titulo> AQUI VA LA INTERFAZ DE INICIO </Titulo> 
         
    
     </Header>
