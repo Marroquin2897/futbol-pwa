@@ -19,7 +19,10 @@ const Boton = styled(Link)`
     justify-content: space-between;
     align-items: center;
     outline: none;
- 
+    
+    &:hover{
+        box-shadow: 3px 0px 30px rgba(163,163,163,1);
+    }
     svg { 
         height: ${(props) => props.iconoGrande ? '100%' : '0.75rem;'};  /* 12px */
         fill: white;

@@ -1,20 +1,17 @@
-* {
-  margin: 0;
-  padding: 0;
+*{
   box-sizing: border-box;
 }
 
-:root { 
-  font-size: 16px;
+body{
+  background: #011654;
+  font-family: 'Ubuntu', sans-serif;
 }
 
-body {
-  background: #011654;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Work Sans', sans-serif;
+main{
+  max-width: 800px;
+  width: 90%;
+  margin: auto;
+  padding: 40 px;
 }
 
 #root {

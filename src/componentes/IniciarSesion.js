@@ -1,20 +1,14 @@
 import React, {useState} from 'react';
 import { Helmet } from 'react-helmet';
-import {Header, Titulo, } from '../elementos/Header';
+import {Titulo } from '../elementos/Header';
 import Boton from './../elementos/Boton';
-import {ContenedorBoton, Formulario, Input } from './../elementos/ElementosFormularios';
-import {ReactComponent as SvgLogin} from './../imagenes/iconmonstr-user-19.svg';
-import styled from 'styled-components';
+import {ContenedorBoton, Formulario, Input,IconoInicio } from './../elementos/ElementosFormularios';
 import {  signInWithEmailAndPassword } from "firebase/auth";
 import {auth} from './../firebase/firebaseConfig';
 import Alerta from './../elementos/Alerta';
 import {useNavigate} from 'react-router-dom';
-const Svg = styled(SvgLogin)`
-    width: 100%;
-    max-height: 15.5rem;
-    margin-bottom: 5.25rem;
-    color: #560000;
-`;
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import Contenedor from './../elementos/Contenedor';
 const IniciarSesion = () => {
     const navigate = useNavigate();
    
@@ -86,14 +80,12 @@ const handleSubmit = async (e) =>{ //Para obtener los datos de los inputs
       <Helmet>
           <title>Iniciar Sesion</title>
       </Helmet>
-    <Header>
-        <Titulo> Iniciar Sesion </Titulo> 
-        
-   
-    </Header>
+    
+      <IconoInicio icon={faCircleUser}/>
+      <Contenedor>
+      <Titulo> Iniciar Sesion </Titulo> 
       <Formulario onSubmit={handleSubmit}>
-          <Svg/>
-          <Input
+        <Input
                   type='email'
                   name='email'
                   placeholder='Ingresa tu correo'
@@ -110,9 +102,9 @@ const handleSubmit = async (e) =>{ //Para obtener los datos de los inputs
           
           <ContenedorBoton>
               <Boton as="button" type="submit"> Iniciar Sesion </Boton>
-          </ContenedorBoton>    
-          
+          </ContenedorBoton>  
       </Formulario>
+      </Contenedor>
       <Alerta
         tipo={alerta.tipo}
         mensaje={alerta.mensaje}

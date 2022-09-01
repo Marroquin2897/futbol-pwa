@@ -12,12 +12,13 @@ const Header = styled.div` /*Para lo elementos como el boton de regresar y avanz
     }
 `;
  
-const Titulo = styled.h1`
-    font-weight: normal;
-    font-size: 2.5rem; /* 40px */
+const Titulo = styled.h2`
+    margin-bottom: 10px;
+    color: #FFFFFF;
+    padding: 10px;
     text-align: center;
-    @media(max-width: 60rem){ /* 950px */
-        font-size: 2rem; /* 32px */
+    @media(max-width: 950px){ /* 950px */
+        font-size: 32px; /* 32px */
     }
 `;
  

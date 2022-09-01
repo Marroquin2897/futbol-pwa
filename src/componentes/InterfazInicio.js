@@ -1,20 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import {Header, Titulo, } from '../elementos/Header';
-
-
-import {ReactComponent as SvgLogin} from './../imagenes/iconmonstr-user-19.svg';
-import styled from 'styled-components';
-
-
-
-const Svg = styled(SvgLogin)`
-    width: 100%;
-    max-height: 6.25rem;
-    margin-bottom: 2.25rem;
-    background: #560000;
-`;
-
+import {ContenedorBoton } from './../elementos/ElementosFormularios';
+import Boton from './../elementos/Boton';
 const InterfazInicio = () => {
 
 
@@ -24,10 +12,11 @@ const InterfazInicio = () => {
           <title>Inicio</title>
       </Helmet>
     <Header>
-        <Titulo> AQUI VA LA INTERFAZ DE INICIO </Titulo> 
-        
-   
+        <Titulo> N O T I C I A S </Titulo> 
     </Header>
+    <ContenedorBoton>
+        <Boton as="button" type="submit"> Registrar Escuela </Boton>
+    </ContenedorBoton>  
       
       
   </>

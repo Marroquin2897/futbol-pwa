@@ -1,20 +1,16 @@
 import React, {useState} from 'react';
 import { Helmet } from 'react-helmet';
-import {Header, Titulo, } from '../elementos/Header';
+import {Titulo} from '../elementos/Header';
 import Boton from './../elementos/Boton';
-import {ContenedorBoton, Formulario, Input } from './../elementos/ElementosFormularios';
-import {ReactComponent as SvgLogin} from './../imagenes/iconmonstr-user-19.svg';
-import styled from 'styled-components';
+import {ContenedorBoton, Formulario, Input,IconoInicio } from './../elementos/ElementosFormularios';
+import ContenedorDiv from './../elementos/ContenedorDiv';
 import {auth} from './../firebase/firebaseConfig';
 import {useNavigate} from 'react-router-dom';
 import {  createUserWithEmailAndPassword } from "firebase/auth";
 import Alerta from './../elementos/Alerta';
-const Svg = styled(SvgLogin)`
-    width: 100%;
-    max-height: 6.25rem;
-    margin-bottom: 2.25rem;
-    background: #560000;
-`;
+
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+
 
 
 const RegistroUsuarios = () => {
@@ -116,15 +112,12 @@ const RegistroUsuarios = () => {
         <Helmet>
             <title>Crear Cuenta</title>
         </Helmet>
-      <Header>
-          <Titulo> Crear Cuenta </Titulo> 
-          
-            
-           
-      </Header>
+        <IconoInicio icon={faCircleUser}/>
+        <Titulo> Crear Cuenta </Titulo> 
+        <ContenedorDiv>
         <Formulario onSubmit={handleSubmit}>
-            <Svg/>
-            <Input
+        
+        <Input
                     type='text'
                     name='nombre'
                     placeholder='Ingresa tu nombre(s)'
@@ -159,11 +152,17 @@ const RegistroUsuarios = () => {
                     value={password2}
                     onChange={handleChange}
                 />
+        
+            
             <ContenedorBoton>
-                <Boton as="button" type="submit"> Crear Cuenta </Boton>
-            </ContenedorBoton>    
+              <Boton as="button" type="submit"> Crear Cuenta </Boton>  
+            </ContenedorBoton>
+            
+             
             
         </Formulario>
+        </ContenedorDiv>
+        
         <Alerta 
             tipo= {alerta.tipo}
             mensaje= {alerta.mensaje}
