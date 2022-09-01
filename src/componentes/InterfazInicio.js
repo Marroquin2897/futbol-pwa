@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import {Header, Titulo, } from '../elementos/Header';
 import {ContenedorBoton } from './../elementos/ElementosFormularios';
-import Boton from './../elementos/Boton';
+import BtnCerrarSesion from './../elementos/BotonCerrarSesion';
 const InterfazInicio = () => {
 
 
@@ -15,7 +15,7 @@ const InterfazInicio = () => {
         <Titulo> N O T I C I A S </Titulo> 
     </Header>
     <ContenedorBoton>
-        <Boton as="button" type="submit"> Registrar Escuela </Boton>
+        <BtnCerrarSesion/>
     </ContenedorBoton>  
       
       

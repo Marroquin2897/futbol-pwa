@@ -6,9 +6,10 @@ const App = () => {
   return (
     <>
       <Helmet>
-        <title>Otra cosa</title>
+          <title>Inicio</title>
       </Helmet>
-
+   
+    
     </>
     );
 }

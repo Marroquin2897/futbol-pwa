@@ -21,6 +21,25 @@ const IconoInicio = styled(FontAwesomeIcon)`
     }
     
     `;
+    const IconoSalida = styled(FontAwesomeIcon)`
+    color: #560000;
+    margin-left: 660px;
+    z-index: 100;
+    font-size: 150px;
+    
+    @media(max-width: 60rem){ /* 950px  Alinear los elementos cuando la pantalla se hace mas pequeña*/
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+ 
+        & > div {
+            display: flex;
+            margin-bottom: 1.25rem; /* 20px */
+            justify-content: end;
+        }
+    }
+    
+    `;
 
 const ContenedorFiltros = styled.div`
     display: flex;
@@ -78,7 +97,7 @@ const ContenedorBoton = styled.div`
     flex-direction: column;
     align-items: center;
     grid-column: span 2;
-
+    gap: 20px;
     @media (max-width: 800px){
         grid-column: span 1;
     }
@@ -92,4 +111,4 @@ const Selector = styled.div`
     margin: '0 auto';
 `;
 
-export {ContenedorFiltros, Formulario, Input, InputGrande, ContenedorBoton,IconoInicio, Selector};
+export {ContenedorFiltros, Formulario, Input, InputGrande, ContenedorBoton,IconoInicio, Selector,IconoSalida};
