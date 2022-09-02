@@ -7,7 +7,8 @@ import ContenedorDiv from './../elementos/ContenedorDiv';
 import {ContenedorBoton, Formulario, Input } from './../elementos/ElementosFormularios';
 import Boton from './../elementos/Boton';
 import Select from 'react-select';
-
+import {db} from './../firebase/firebaseConfig';
+import {collection, addDoc} from 'firebase/firestore';
 
 const modalidades= [
     {label: 'Fútbol 7', value:'1'},
@@ -58,12 +59,33 @@ const escuelas = [
 ]
 const RegistrarEscuela = () => {
 
-
-const [modalidad, cambiarModalidad] = useState();
+const[escuela,cambiarEscuela] = useState('');
+const [modalidad, cambiarModalidad] = useState('');
+const[clave, cambiarClave] = useState('');
 
     const handleSelectChange = ({value}) => {
         console.log(value);
         cambiarModalidad(value);
+        cambiarEscuela(value);
+    }
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        try{
+           await addDoc(collection(db,'escuelas'),{
+            clave: clave,
+            escuela: escuela,
+            modalidad: modalidad
+        }); 
+        } catch(error){
+            console.log("Error al registrar escuela");
+            console.log(error);
+        }
+        
+
+        cambiarClave('');
+        cambiarEscuela('');
+        cambiarModalidad('');
     }
     return ( 
         <>
@@ -73,7 +95,7 @@ const [modalidad, cambiarModalidad] = useState();
         <IconoInicio icon={faSchool}/>
         <Titulo> Registrar Escuela </Titulo> 
         <ContenedorDiv>
-            <Formulario >
+            <Formulario action="" onSubmit={onSubmit} >
             
                 <Input
                     type='text'
