@@ -63,12 +63,15 @@ const[escuela,cambiarEscuela] = useState('');
 const [modalidad, cambiarModalidad] = useState('');
 const[clave, cambiarClave] = useState('');
 
-    const handleSelectChange = ({value}) => {
+    const handleSelectModalidadChange = ({value}) => {
         console.log(value);
         cambiarModalidad(value);
+        
+    }
+    const handleSelectEscuelaChange = ({value}) => {
+        console.log(value);
         cambiarEscuela(value);
     }
-
     const onSubmit = async (e) => {
         e.preventDefault();
         try{
@@ -105,12 +108,12 @@ const[clave, cambiarClave] = useState('');
                 <Select
                     placeholder='Selecciona la escuela'
                     options = {escuelas}
-                    onChange= {handleSelectChange}
+                    onChange= {handleSelectEscuelaChange}
                 /> 
                 <Select
                     placeholder='Modalidades a participar'
                     isMulti options = {modalidades}
-                    onChange= {handleSelectChange}
+                    onChange= {handleSelectModalidadChange}
                 /> 
         
                 <ContenedorBoton>
