@@ -12,6 +12,9 @@ import {Helmet} from 'react-helmet';
 import favicon from './imagenes/icono2-burrito.png';
 import InterfazInicio from './componentes/InterfazInicio';
 import {AuthProvider} from './contextos/AuthContext';
+import RutaPrivada from './componentes/RutaPrivada'
+
+
 WebFont.load({
   google: { //Tipo de letra para la pwa
     families: ['Ubuntu: 400,500,700', 'Droid Serif']
@@ -31,9 +34,22 @@ const Index = () => {
           <Routes>
             <Route path="/iniciar-sesion" element = {<IniciarSesion/>}/>
             <Route path="/crear-cuenta" element = {<RegistroUsuario/>}/>
-            <Route path="/inicio" element = {<InterfazInicio/>}/>
-            <Route path="/registrar-escuela" element = {<RegistrarEscuela/>}/>
-            <Route path="/registrar-jugador" element = {<RegistrarJugador/>}/>
+
+            <Route path="/inicio" element={
+              <RutaPrivada>
+                <InterfazInicio/>
+              </RutaPrivada>
+            }/>
+            <Route path="/registrar-escuela" element={
+              <RutaPrivada>
+                <RegistrarEscuela/>
+              </RutaPrivada>
+            }/>
+            <Route path="/registrar-jugador" element={
+              <RutaPrivada>
+                <RegistrarJugador/>
+              </RutaPrivada>
+            }/>
           </Routes>
           <App/>
         </BrowserRouter>
