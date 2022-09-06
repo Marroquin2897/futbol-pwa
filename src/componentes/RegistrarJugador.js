@@ -8,26 +8,44 @@ import Boton from './../elementos/Boton';
 import Select from 'react-select';
 
 import ContenedorDiv from './../elementos/ContenedorDiv';
-const semestres= [
-        {label: '1°', value:'1'},
-        {label: '2°', value:'2'},
-        {label: '3°', value:'3'},
-        {label: '4°', value:'4'},
-        {label: '5°', value:'5'},
-        {label: '6°', value:'6'},
-        {label: '7°', value:'7'},
-        {label: '8°', value:'8'},
-        {label: '9°', value:'9'},
-        {label: '10°', value:'10'},
-    ]
-const RegistrarJugador = () => {
-    
-    const [semestre, cambiarSemestres] = useState();
 
-    const handleSelectChange = ({value}) => {
-        console.log(value);
-        cambiarSemestres(value);
+const RegistrarJugador = () => {
+    const [nombre, cambiarNombre] = useState('');
+    const [apellidos, cambiarApellidos] = useState('');
+    const [fechanac, cambiarFechaNac] = useState('');
+    const [nss, cambiarNss] = useState('');
+    const [curp, cambiarCurp] = useState('');
+    const [boleta, cambiarBoleta] = useState('');
+    const [semestre, cambiarSemestre] = useState('');
+
+    const handleChange = (e) => {
+        switch(e.target.name){
+            case 'nombre':
+                cambiarNombre(e.target.value);
+                break;
+            case 'apellidos':
+                cambiarApellidos(e.target.value);
+                break;
+            case 'fechanac':
+                cambiarFechaNac(e.target.value);
+                break;
+            case 'nss':
+                cambiarNss(e.target.value);
+                break;
+            case 'curp':
+                cambiarCurp(e.target.value);
+                break;
+            case 'boleta':
+                cambiarBoleta(e.target.value);
+                break; 
+            case 'semestre':
+                cambiarSemestre(e.target.value);
+                break;   
+            default:
+                break;
+        }
     }
+   
     return ( 
         <>
         <Helmet>
@@ -48,6 +66,10 @@ const RegistrarJugador = () => {
                     name='apellidos'
                     placeholder='Apellidos del alumno(a)'          
                 />
+                <Input
+                    type='date'
+                    name='fechanac'          
+                />
                     
                 <Input
                     type='text'
@@ -64,11 +86,11 @@ const RegistrarJugador = () => {
                     name='boleta'
                     placeholder='Boleta del alumno(a)' 
                 />
-                <Select
-                    placeholder='Semestre'
-                    options = {semestres}
-                    onChange= {handleSelectChange}
-                />     
+                <Input
+                    type='text'
+                    name='semestre'
+                    placeholder='Semestre del alumno(a)' 
+                />   
                 <ContenedorBoton>
                 <Boton as="button" type="submit"> Registrar Jugador </Boton>  
                 </ContenedorBoton>

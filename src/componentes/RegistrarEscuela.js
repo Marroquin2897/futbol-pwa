@@ -59,12 +59,13 @@ const escuelas = [
 ]
 const RegistrarEscuela = () => {
 
-const[escuela,cambiarEscuela] = useState('');
-const [modalidad, cambiarModalidad] = useState('');
-const[clave, cambiarClave] = useState('');
+let[escuela,cambiarEscuela] = useState('');
+let [modalidad, cambiarModalidad] = useState('');
+let[clave, cambiarClave] = useState('');
 
     const handleChange = (e) => {
-        console.log(e);
+        cambiarClave(e.target.value);
+        
     }
     const onDropdownChange = (value) => {
         console.log(value);
@@ -82,9 +83,10 @@ const[clave, cambiarClave] = useState('');
             clave: clave,
             escuela: escuela,
             modalidad: modalidad
+            
         }); 
+        
         } catch(error){
-            console.log("Error al registrar escuela");
             console.log(error);
         }
         
