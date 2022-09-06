@@ -63,12 +63,15 @@ const[escuela,cambiarEscuela] = useState('');
 const [modalidad, cambiarModalidad] = useState('');
 const[clave, cambiarClave] = useState('');
 
-    const handleSelectModalidadChange = ({value}) => {
+    const handleChange = (e) => {
+        console.log(e);
+    }
+    const onDropdownChange = (value) => {
         console.log(value);
         cambiarModalidad(value);
         
     }
-    const handleSelectEscuelaChange = ({value}) => {
+    const onDropdownChangeEsc = (value) => {
         console.log(value);
         cambiarEscuela(value);
     }
@@ -103,17 +106,18 @@ const[clave, cambiarClave] = useState('');
                 <Input
                     type='text'
                     name='clave'
-                    placeholder='Ingresa clave de la escuela'         
+                    placeholder='Ingresa clave de la escuela'
+                    onChange= {handleChange}         
                 /> 
                 <Select
                     placeholder='Selecciona la escuela'
                     options = {escuelas}
-                    onChange= {handleSelectEscuelaChange}
+                    onChange= {onDropdownChangeEsc}
                 /> 
                 <Select
                     placeholder='Modalidades a participar'
                     isMulti options = {modalidades}
-                    onChange= {handleSelectModalidadChange}
+                    onChange= {onDropdownChange}
                 /> 
         
                 <ContenedorBoton>

@@ -19,6 +19,7 @@ const InterfazInicio = () => {
     <ContenedorBoton>
         <BtnCerrarSesion/>
         <Boton to="/registrar-escuela"> Registrar Escuela </Boton>
+        <Boton to="/registrar-jugador"> Registrar Jugador </Boton>
     </ContenedorBoton>  
       
       
