@@ -13,6 +13,7 @@ import favicon from './imagenes/icono2-burrito.png';
 import InterfazInicio from './componentes/InterfazInicio';
 import {AuthProvider} from './contextos/AuthContext';
 import RutaPrivada from './componentes/RutaPrivada'
+import { PasswordResetLandingPage } from './componentes/PasswordResetLandingPage';
 
 
 WebFont.load({
@@ -34,6 +35,7 @@ const Index = () => {
           <Routes>
             <Route path="/iniciar-sesion" element = {<IniciarSesion/>}/>
             <Route path="/crear-cuenta" element = {<RegistroUsuario/>}/>
+            <Route path="/reset-password" element = {<PasswordResetLandingPage/>}/>
 
             <Route path="/inicio" element={
               <RutaPrivada>
