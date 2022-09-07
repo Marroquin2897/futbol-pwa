@@ -1,24 +1,24 @@
 import { useState } from "react";
-//import { useHistory } from "react-router-dom";
-//import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
 export const ForgotPasswordPage = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [success, setSuccess] = useState(false);
     const [emailValue, setEmailValue] = useState('');
-   // const history = useHistory();
-/*
+   const navigate = useNavigate();
+
     const onsubmitClicked = async () => {
         try {
             await axios.put(`/api/forgot-password/${emailValue}`);
             setSuccess(true);
             setTimeout(() => {
-                history.push('/login');
+                navigate('/iniciar-sesion');
             }, 3000);
         } catch (e) {
             setErrorMessage(e.message);
         }
-    }*/
+    }
 
     return success ? (
         <div className="content-container">
@@ -36,7 +36,7 @@ export const ForgotPasswordPage = () => {
                 placeholder="correo-electronico@mail.com" />
                 <button
                     disabled={!emailValue}
-                    //onClick={onsubmitClicked}
+                    onClick={onsubmitClicked}
                     >Send Reset Link</button>
         </div>
     )

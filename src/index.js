@@ -37,6 +37,7 @@ const Index = () => {
             <Route path="/iniciar-sesion" element = {<IniciarSesion/>}/>
             <Route path="/crear-cuenta" element = {<RegistroUsuario/>}/>
             <Route path="/reset-password" element = {<PasswordResetLandingPage/>}/>
+            <Route path="/reset-password2" element = {<ForgotPasswordPage/>}/>
 
             <Route path="/inicio" element={
               <RutaPrivada>
