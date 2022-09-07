@@ -14,6 +14,7 @@ import InterfazInicio from './componentes/InterfazInicio';
 import {AuthProvider} from './contextos/AuthContext';
 import RutaPrivada from './componentes/RutaPrivada'
 import { PasswordResetLandingPage } from './componentes/PasswordResetLandingPage';
+import {ForgotPasswordPage} from './componentes/ForgotPasswordPage';
 
 
 WebFont.load({
@@ -52,6 +53,9 @@ const Index = () => {
                 <RegistrarJugador/>
               </RutaPrivada>
             }/>
+            <Route path="/forgot-password">
+              <ForgotPasswordPage />
+            </Route>
           </Routes>
           <App/>
         </BrowserRouter>
