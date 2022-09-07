@@ -1,4 +1,4 @@
-import React, {useState,useContext} from 'react';
+import React, {useState} from 'react';
 import { Helmet } from 'react-helmet';
 import {Titulo} from '../elementos/Header';
 import { faSchool } from '@fortawesome/free-solid-svg-icons';
@@ -9,7 +9,7 @@ import Boton from './../elementos/Boton';
 import Select from 'react-select';
 import {db} from './../firebase/firebaseConfig';
 import {collection, addDoc} from 'firebase/firestore';
-
+import {useNavigate} from 'react-router-dom';
 const modalidades= [
     {label: 'Fútbol 7', value:'1'},
     {label: 'Fútbol Asociación', value:'2'},
@@ -58,7 +58,7 @@ const escuelas = [
     {label: 'UPIITA', value:'09DPN0020F'},
 ]
 const RegistrarEscuela = () => {
-
+const navigate = useNavigate();
 let[escuela,cambiarEscuela] = useState('');
 let [modalidad, cambiarModalidad] = useState('');
 let[clave, cambiarClave] = useState('');
@@ -77,9 +77,11 @@ let[clave, cambiarClave] = useState('');
         cambiarEscuela(value);
     }
     const onSubmit = async (e) => {
+        
         e.preventDefault();
         try{
            await addDoc(collection(db,'escuelas'),{
+            
             clave: clave,
             escuela: escuela,
             modalidad: modalidad
@@ -90,7 +92,7 @@ let[clave, cambiarClave] = useState('');
             console.log(error);
         }
         
-
+        navigate('/inicio');
         cambiarClave('');
         cambiarEscuela('');
         cambiarModalidad('');
@@ -123,7 +125,8 @@ let[clave, cambiarClave] = useState('');
                 /> 
         
                 <ContenedorBoton>
-                    <Boton as="button" type="submit"> Registrar </Boton>  
+                    <Boton as="button" type="submit"> Registrar </Boton>
+                    <Boton as="button" to="/inicio">Regresar</Boton>  
                 </ContenedorBoton>
 
             </Formulario>
