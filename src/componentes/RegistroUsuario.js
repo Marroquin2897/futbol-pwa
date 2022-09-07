@@ -162,11 +162,11 @@ const RegistroUsuarios = () => {
             
             <ContenedorBoton>
               <Boton as="button" type="submit"> Crear Cuenta </Boton>  
+              
             </ContenedorBoton>
             
-             
-            
         </Formulario>
+
         </ContenedorDiv>
         
         <Alerta 

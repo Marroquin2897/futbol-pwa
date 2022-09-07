@@ -3,7 +3,7 @@ import theme from './../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const IconoInicio = styled(FontAwesomeIcon)`
-    color: #560000;
+    color: #730c0d;
     margin-left: 660px;
     z-index: 100;
     font-size: 150px;
