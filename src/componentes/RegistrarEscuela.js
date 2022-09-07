@@ -77,7 +77,6 @@ let[clave, cambiarClave] = useState('');
         cambiarEscuela(value);
     }
     const onSubmit = async (e) => {
-        
         e.preventDefault();
         try{
            await addDoc(collection(db,'escuelas'),{

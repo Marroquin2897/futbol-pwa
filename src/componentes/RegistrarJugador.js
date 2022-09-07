@@ -50,7 +50,10 @@ const RegistrarJugador = () => {
     }
     
     const handleSubmit = async (e) => {
+        let mensaje;
         e.preventDefault();
+        cambiarEdoAlerta(false);
+        cambiarAlerta({});
         if(nombre === '' || apellidos === '' || fechanac ==='' || nss === '' || curp ===''|| boleta ==='' || semestre ===''){
             cambiarEdoAlerta(true);
             cambiarAlerta({
@@ -68,9 +71,20 @@ const RegistrarJugador = () => {
                 curp: curp,
                 boleta: boleta,
                 semestre: semestre
+
+                
             });
-        } catch(error){
-            console.log('Error al registrar jugador');
+            cambiarAlerta({
+                tipo:'exito',
+                mensaje: "Jugador registrado exitosamente"
+               });
+            
+        } 
+        catch(error){
+            cambiarAlerta({
+                tipo:'error',
+                mensaje: mensaje
+               });
         }
         cambiarNombre('');
         cambiarApellidos('');
@@ -145,7 +159,12 @@ const RegistrarJugador = () => {
                 </ContenedorBoton>
 
             </Formulario>
-        </ContenedorDiv>    
+        </ContenedorDiv>  
+        <Alerta 
+            tipo= {alerta.tipo}
+            mensaje= {alerta.mensaje}
+            estadoAlerta={estadoAlerta}
+            cambiarEdoAlerta={cambiarEdoAlerta}/>  
     </>
      );
 }
