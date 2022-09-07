@@ -8,8 +8,9 @@ import {auth} from './../firebase/firebaseConfig';
 import {useNavigate} from 'react-router-dom';
 import {  createUserWithEmailAndPassword } from "firebase/auth";
 import Alerta from './../elementos/Alerta';
-
+import {db} from './../firebase/firebaseConfig';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { addDoc, collection } from 'firebase/firestore';
 
 
 
@@ -79,7 +80,12 @@ const RegistroUsuarios = () => {
         }
         //Guardar los datos en FIREBASE
         try{
+           
             await createUserWithEmailAndPassword(auth,email,password);
+             await addDoc(collection(db,'usuarios'),{
+                nombre:nombre,
+                apellidos: apellidos,
+            });
            
             navigate('/iniciar-sesion');
         } catch(error){ //Mostrar los errores que puede haber en cada campo

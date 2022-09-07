@@ -53,9 +53,8 @@ const Index = () => {
                 <RegistrarJugador/>
               </RutaPrivada>
             }/>
-            <Route path="/forgot-password">
-              <ForgotPasswordPage />
-            </Route>
+            
+          
           </Routes>
           <App/>
         </BrowserRouter>
