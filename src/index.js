@@ -39,11 +39,7 @@ const Index = () => {
             <Route path="/reset-password" element = {<PasswordResetLandingPage/>}/>
             <Route path="/reset-password2" element = {<ForgotPasswordPage/>}/>
 
-            <Route path="/inicio" element={
-              <RutaPrivada>
-                <InterfazInicio/>
-              </RutaPrivada>
-            }/>
+            <Route path="/inicio" element={<InterfazInicio />}/>
             <Route path="/registrar-escuela" element={
               <RutaPrivada>
                 <RegistrarEscuela/>
