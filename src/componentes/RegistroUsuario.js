@@ -66,9 +66,46 @@ const RegistroUsuarios = () => {
         e.preventDefault();
         cambiarEdoAlerta(false);
         cambiarAlerta({});
-        //validar el correo
-        const expresionRegular = /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/;
-        if(!expresionRegular.test(email)){ //Si NO hay correo entonces mostramos mensaje de error
+        //validar el correo, nombre, direccion, telefono, boleta, apellidos
+        const expresionRegularCorreo = /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/;
+        const expresionRegularNombre = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
+        const expresionRegularApellidos = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
+        const expresionRegularTelefono = /^\d{7,14}$/;
+        const expresionRegularBoleta = /^\d{7,14}$/;
+        if(!expresionRegularNombre.test(nombre)){
+            cambiarEdoAlerta(true);
+            cambiarAlerta({
+                tipo: 'error',
+                mensaje:'Ingrese un nombre valido'
+            });
+            return;
+        }
+        if(!expresionRegularApellidos.test(apellidos)){
+            cambiarEdoAlerta(true);
+            cambiarAlerta({
+                tipo:'error',
+                mensaje:'Apellido Paterno y Materno'
+            });
+            return;
+        }
+        if(!expresionRegularTelefono.test(telefono)){
+            cambiarEdoAlerta(true);
+            cambiarAlerta({
+                tipo:'error',
+                mensaje:'Numero con 10 digitos'
+            });
+            return;
+        }
+        if(!expresionRegularBoleta.test(boletaempleado)){
+            cambiarEdoAlerta(true);
+            cambiarAlerta({
+                tipo:'error',
+                mensaje:'Solo se permite numeros'
+            });
+            return;
+        }
+
+        if(!expresionRegularCorreo.test(email)){ //Si NO hay correo entonces mostramos mensaje de error
             cambiarEdoAlerta(true);
             cambiarAlerta({
                 tipo: 'error',
@@ -99,6 +136,11 @@ const RegistroUsuarios = () => {
         try{
            
             await createUserWithEmailAndPassword(auth,email,password);
+            cambiarEdoAlerta(true);
+           cambiarAlerta({
+                tipo:'exito',
+                mensaje:'Registrado exitosamente'
+            });
              await addDoc(collection(db,'usuarios'),{
                 nombre:nombre,
                 apellidos: apellidos,
@@ -106,10 +148,11 @@ const RegistroUsuarios = () => {
                 telefono: telefono,
                 direccion: direccion,
                 boleta: boletaempleado,
-                correo: email
+                correo: email   
             });
            
             navigate('/iniciar-sesion');
+            
         } catch(error){ //Mostrar los errores que puede haber en cada campo
             cambiarEdoAlerta(true);
            let mensaje;
@@ -216,7 +259,8 @@ const RegistroUsuarios = () => {
             tipo= {alerta.tipo}
             mensaje= {alerta.mensaje}
             estadoAlerta={estadoAlerta}
-            cambiarEdoAlerta={cambiarEdoAlerta}/>
+            cambiarEdoAlerta={cambiarEdoAlerta}
+        />
     </>
         
      );
