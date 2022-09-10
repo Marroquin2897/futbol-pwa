@@ -105,7 +105,7 @@ let[clave, cambiarClave] = useState('');
         <Titulo> Registrar Escuela </Titulo> 
         <ContenedorDiv>
             <Formulario action="" onSubmit={onSubmit} >
-            
+                
                 <Input
                     type='text'
                     name='clave'
@@ -127,7 +127,6 @@ let[clave, cambiarClave] = useState('');
                     <Boton as="button" type="submit"> Registrar </Boton>
                     <Boton as="button" to="/inicio">Regresar</Boton>  
                 </ContenedorBoton>
-
             </Formulario>
         </ContenedorDiv>
          

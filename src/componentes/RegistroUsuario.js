@@ -2,8 +2,7 @@ import React, {useState} from 'react';
 import { Helmet } from 'react-helmet';
 import {Titulo} from '../elementos/Header';
 import Boton from './../elementos/Boton';
-import {ContenedorBoton, Formulario, Input,IconoInicio } from './../elementos/ElementosFormularios';
-import ContenedorDiv from './../elementos/ContenedorDiv';
+import {BotonCentrado, Formulario, Input,IconoInicio } from './../elementos/ElementosFormularios';
 import {auth} from './../firebase/firebaseConfig';
 import {useNavigate} from 'react-router-dom';
 import {  createUserWithEmailAndPassword } from "firebase/auth";
@@ -18,6 +17,10 @@ const RegistroUsuarios = () => {
     const navigate = useNavigate();
     const[nombre, establecerNombre] = useState('');
     const[apellidos, establecerApellidos] = useState('');
+    const[fechaNac, establecerfechaNac] = useState('');
+    const[telefono, establecerTelefono] = useState('');
+    const[direccion, establecerDireccion] = useState('');
+    const[boletaempleado,establecerBoletaEmpleado] = useState('');
     const[email, establecerEmail] = useState('');
     const[password, establecerPassword] = useState('');
     const[password2, establecerPassword2] = useState('');
@@ -25,6 +28,7 @@ const RegistroUsuarios = () => {
     const[alerta,cambiarAlerta] = useState({});
 
     const handleChange = (e) => {
+        
         switch(e.target.name){
             case 'nombre':
                 establecerNombre(e.target.value);
@@ -32,6 +36,18 @@ const RegistroUsuarios = () => {
             case 'apellidos':
                 establecerApellidos(e.target.value);
                 break;
+            case 'fechaNac':
+                establecerfechaNac(e.target.value);
+                break;
+            case 'telefono':
+                establecerTelefono(e.target.value);
+                break; 
+            case 'direccion':
+                establecerDireccion(e.target.value);
+                break;
+            case 'boleta':
+                establecerBoletaEmpleado(e.target.value);
+                break;  
             case 'email':
                 establecerEmail(e.target.value);
                 break;
@@ -60,8 +76,8 @@ const RegistroUsuarios = () => {
             });
             return;
         }
-
-        if(nombre === '' || apellidos === '' || email ==='' || password === '' || password2 ===''){ //Validacion de que llena todos los campos
+        //Validar que ningun campo quede vacio 
+        if(nombre === '' || apellidos === '' || fechaNac === '' || telefono === '' || direccion === '' || boletaempleado === '' || email ==='' || password === '' || password2 ===''){ 
             cambiarEdoAlerta(true);
             cambiarAlerta({
                 tipo: 'error',
@@ -70,6 +86,7 @@ const RegistroUsuarios = () => {
             return;
         }
 
+        //Validar que las contraseñas sean iguales
         if(password !== password2){
             cambiarEdoAlerta(true);
             cambiarAlerta({
@@ -85,6 +102,11 @@ const RegistroUsuarios = () => {
              await addDoc(collection(db,'usuarios'),{
                 nombre:nombre,
                 apellidos: apellidos,
+                fechaNacimiento: fechaNac,
+                telefono: telefono,
+                direccion: direccion,
+                boleta: boletaempleado,
+                correo: email
             });
            
             navigate('/iniciar-sesion');
@@ -102,7 +124,6 @@ const RegistroUsuarios = () => {
 					mensaje = 'El correo electrónico no es válido.'
 				    break;
 				default:
-                    
 					mensaje = 'Hubo un error al intentar crear la cuenta.'
 				    break;
            }
@@ -120,55 +141,77 @@ const RegistroUsuarios = () => {
         </Helmet>
         <IconoInicio icon={faCircleUser}/>
         <Titulo> Crear Cuenta </Titulo> 
-        <ContenedorDiv>
+        
         <Formulario onSubmit={handleSubmit}>
-        
-        <Input
-                    type='text'
-                    name='nombre'
-                    placeholder='Ingresa tu nombre(s)'
-                    value={nombre}
-                    onChange={handleChange}
-                />
-            <Input
-                    type='text'
-                    name='apellidos'
-                    placeholder='Ingresa tu apellido(s)'
-                    value={apellidos}
-                    onChange={handleChange}
-                />
-            <Input
-                    type='email'
-                    name='email'
-                    placeholder='Ingresa tu correo'
-                    value={email}
-                    onChange={handleChange}
-                />
-            <Input
-                    type='password'
-                    name='password'
-                    placeholder='Contraseña'
-                    value={password}
-                    onChange={handleChange}
-                />
-            <Input
-                    type='password'
-                    name='password2'
-                    placeholder='Confirmar contraseña'
-                    value={password2}
-                    onChange={handleChange}
-                />
-        
             
-            <ContenedorBoton>
-              <Boton as="button" type="submit"> Crear Cuenta </Boton>  
-              
-            </ContenedorBoton>
+            <Input
+                type='text'
+                name='nombre'
+                placeholder='Ingresa tu nombre(s)'
+                value={nombre}
+                onChange={handleChange}
+            />
+            <Input
+                type='text'
+                name='apellidos'
+                placeholder='Ingresa tu apellido(s)'
+                value={apellidos}
+                onChange={handleChange}
+            />
+            <Input
+                type='date'
+                name='fechaNac'
+                value={fechaNac}
+                onChange={handleChange}
+            />
+            <Input
+                type='text'
+                name='telefono'
+                placeholder='Ingresa tu telefono 10 digitos'
+                value={telefono}
+                onChange={handleChange}
+            />
+            <Input
+                type='text'
+                name='direccion'
+                value={direccion}
+                onChange={handleChange}
+                placeholder='Calle No. Ext No. Int Col. CP Municipio/Alcaldia'
+            />
+            <Input
+                type='text'
+                name='boleta'
+                value={boletaempleado}
+                onChange={handleChange}
+                placeholder='Boleta (Alumno) o No. Empleado (Profesor)'
+            />
             
+            <Input
+                type='email'
+                name='email'
+                placeholder='Ingresa tu correo'
+                value={email}
+                onChange={handleChange}
+            />
+            <Input
+                type='password'
+                name='password'
+                placeholder='Contraseña'
+                value={password}
+                onChange={handleChange}
+            />
+            <Input
+                type='password'
+                name='password2'
+                placeholder='Confirmar contraseña'
+                value={password2}
+                onChange={handleChange}
+            />       
+            <BotonCentrado>
+                <Boton as="button" type="submit"> Crear Cuenta </Boton>       
+            </BotonCentrado>
+        
         </Formulario>
-
-        </ContenedorDiv>
-        
         <Alerta 
             tipo= {alerta.tipo}
             mensaje= {alerta.mensaje}
