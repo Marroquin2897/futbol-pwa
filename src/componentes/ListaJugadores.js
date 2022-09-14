@@ -1,24 +1,18 @@
-import { Firestore } from 'firebase/firestore';
+
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import {Titulo} from '../elementos/Header';
-
+import {db} from './../firebase/firebaseConfig';
 
 const VerJugadores = () => {
 
-    const[data,setData] = useState();
-    async function loadData(){
-        try{
-            const jugadores = await Firestore().colllection('jugadores').get()
-            console.log(jugadores.docs);
-            setData(jugadores.docs);
-        }
-        catch(error){
-            console.log(error);
-        }
-    }
+    const[input,setInput] = useState('');
+    const[dato,setData] = useState([]);
+    
     useEffect(() => {
-        loadData()
+       db.collection('jugadores').onSnapshot(snapshot => {
+            setData(snapshot.docs.map(doc => ({id:doc.id,dato:doc.data().dato})))
+       })
     },[])
 
     
