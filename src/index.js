@@ -8,14 +8,13 @@ import IniciarSesion from './componentes/IniciarSesion';
 import RegistroUsuario from './componentes/RegistroUsuario';
 import RegistrarEscuela from './componentes/RegistrarEscuela';
 import RegistrarJugador from './componentes/RegistrarJugador';
-import ListaJugadores from './componentes/ListaJugadores';
 import {Helmet} from 'react-helmet';
 import favicon from './imagenes/icono2-burrito.png';
 import InterfazInicio from './componentes/InterfazInicio';
 import {AuthProvider} from './contextos/AuthContext';
 import RutaPrivada from './componentes/RutaPrivada'
-import { PasswordResetLandingPage } from './componentes/PasswordResetLandingPage';
-import {ForgotPasswordPage} from './componentes/ForgotPasswordPage';
+import ForgotPassword from './componentes/ForgotPassword';
+
 
 
 WebFont.load({
@@ -37,10 +36,13 @@ const Index = () => {
           <Routes>
             <Route path="/iniciar-sesion" element = {<IniciarSesion/>}/>
             <Route path="/crear-cuenta" element = {<RegistroUsuario/>}/>
-            <Route path="/reset-password" element = {<PasswordResetLandingPage/>}/>
-            <Route path="/reset-password2" element = {<ForgotPasswordPage/>}/>
+            <Route path="/Reset-password" element = {<ForgotPassword/>}/>
 
-            <Route path="/inicio" element={<InterfazInicio />}/>
+            <Route path="/inicio" element={
+              <RutaPrivada>
+                <InterfazInicio/>
+              </RutaPrivada>
+            }/>
             <Route path="/registrar-escuela" element={
               <RutaPrivada>
                 <RegistrarEscuela/>
@@ -49,11 +51,6 @@ const Index = () => {
             <Route path="/registrar-jugador" element={
               <RutaPrivada>
                 <RegistrarJugador/>
-              </RutaPrivada>
-            }/>
-            <Route path="/lista-jugador" element={
-              <RutaPrivada>
-                <ListaJugadores/>
               </RutaPrivada>
             }/>
             
