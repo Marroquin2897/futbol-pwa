@@ -103,7 +103,7 @@ const handleSubmit = async (e) =>{ //Para obtener los datos de los inputs
           <ContenedorBoton>
               <Boton as="button" type="submit"> Iniciar Sesion </Boton>
               <Boton to='/crear-cuenta'> Registrarse </Boton>
-              <Boton to="/reset-"> ¿Olvidaste la contraseña? </Boton>
+              <Boton to="/Reset-password"> ¿Olvidaste la contraseña? </Boton>
           </ContenedorBoton>  
             
 

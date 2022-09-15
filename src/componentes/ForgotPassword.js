@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../contextos/AuthContext'
 
 export default function ForgotPassword() {
 
@@ -10,7 +10,7 @@ export default function ForgotPassword() {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     try {
@@ -19,7 +19,8 @@ export default function ForgotPassword() {
       setLoading(true)
       await resetPassword(emailRef.current.value)
       setMessage('Checa tu bandeja de entrada y sigue las instrucciones')
-    } catch {
+    } catch (error) {
+      console.log(error)
       setError('Fallo al restaurar tu password')
     }
 
@@ -42,7 +43,7 @@ export default function ForgotPassword() {
             />
             <div className="btnContainer">
               <button type='submit' disabled={loading}>Restaurar password</button>
-              <p><Link to='/home'><span>Regresear</span></Link></p>
+              <p><Link to='/iniciar-sesion'><span>Regresear</span></Link></p>
             </div>
           </form>
         </div>

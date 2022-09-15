@@ -22,7 +22,7 @@ const VerJugadores = () => {
             <title>Lista de Jugadores</title>
         </Helmet>
         <Titulo> Jugadores: </Titulo> 
-       
+        
         </>
      );
 }
