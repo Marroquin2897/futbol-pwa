@@ -1,33 +1,32 @@
-import React, { useRef, useState } from 'react'
+import React,{useState,useRef} from 'react';
 import { Link } from 'react-router-dom'
-import { useAuth } from '../contextos/AuthContext'
+import { useAuth } from '../contextos/AuthContext';
 
-export default function ForgotPassword() {
+const ForgotPassword = () => {
+    const emailRes = useRef();
+    const{resetPassword} = useAuth();
+    const[loading,setLoading] = useState(false);
+    const[mensaje, setMensaje] = useState('');
+    const [error, setError] = useState('')
 
-  const emailRef = useRef()
-  const { resetPassword } = useAuth()
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState('')
+    const handleSubmit = async (e) =>{
+        e.preventDefault();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    try {
-      setMessage('')
-      setError('')
-      setLoading(true)
-      await resetPassword(emailRef.current.value)
-      setMessage('Checa tu bandeja de entrada y sigue las instrucciones')
-    } catch (error) {
-      console.log(error)
-      setError('Fallo al restaurar tu password')
+        try{
+            setMensaje('');
+            setError('');
+            setLoading(true);
+            await resetPassword(emailRes.current.value)
+            setMensaje('Checa tu bandeja de entrada y sigue las instrucciones');
+           
+        }
+        catch (error){
+            console.log(error);
+            setError('Error al reestablecer contraseña')
+        }
+        setLoading(false);
     }
-
-    setLoading(false)
-  }
-
-  return (
+    return ( 
     <div>
       <section className="login">
         <div className="loginContainer">
@@ -39,15 +38,17 @@ export default function ForgotPassword() {
               type='email'
               autoFocus
               required
-              ref={emailRef}
+              ref={emailRes}
             />
             <div className="btnContainer">
               <button type='submit' disabled={loading}>Restaurar password</button>
-              <p><Link to='/iniciar-sesion'><span>Regresear</span></Link></p>
+              <p><Link to='/home'><span>Regresear</span></Link></p>
             </div>
           </form>
         </div>
       </section>
     </div>
-  )
+     );
 }
+ 
+export default ForgotPassword;

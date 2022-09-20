@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { auth } from './../firebase/firebaseConfig';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, sendPasswordResetEmail} from 'firebase/auth';
 
 
 const AuthContext = React.createContext();
@@ -19,7 +19,7 @@ const AuthProvider = ({children}) => {
 
     
     const resetPassword = (email) => {
-        return auth().sendPasswordResetEmail(email)
+        return sendPasswordResetEmail(auth,email);
       }
     
       function updatePassword(password) {
