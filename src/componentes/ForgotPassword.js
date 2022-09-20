@@ -17,7 +17,7 @@ const ForgotPassword = () => {
             setError('');
             setLoading(true);
             await resetPassword(emailRes.current.value)
-            setMensaje('Checa tu bandeja de entrada y sigue las instrucciones');
+            setMensaje('Revisa tu bandeja de entrada y sigue las instrucciones');
            
         }
         catch (error){
@@ -42,7 +42,7 @@ const ForgotPassword = () => {
             />
             <div className="btnContainer">
               <button type='submit' disabled={loading}>Restaurar password</button>
-              <p><Link to='/home'><span>Regresear</span></Link></p>
+              <p><Link to='/iniciar-sesion'><span>Regresear</span></Link></p>
             </div>
           </form>
         </div>
