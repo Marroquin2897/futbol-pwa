@@ -14,8 +14,8 @@ import InterfazInicio from './componentes/InterfazInicio';
 import {AuthProvider} from './contextos/AuthContext';
 import RutaPrivada from './componentes/RutaPrivada'
 import ForgotPassword from './componentes/ForgotPassword';
-
-
+import Home from './componentes/Home';
+import './App.css';
 
 WebFont.load({
   google: { //Tipo de letra para la pwa
@@ -32,11 +32,11 @@ const Index = () => {
 
     <AuthProvider>
       <BrowserRouter>
-        
           <Routes>
             <Route path="/iniciar-sesion" element = {<IniciarSesion/>}/>
             <Route path="/crear-cuenta" element = {<RegistroUsuario/>}/>
             <Route path="/Reset-password" element = {<ForgotPassword/>}/>
+            <Route path="/" element = {<Home/>}/>
 
             <Route path="/inicio" element={
               <RutaPrivada>

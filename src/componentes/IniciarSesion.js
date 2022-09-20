@@ -1,14 +1,11 @@
 import React, {useState} from 'react';
 import { Helmet } from 'react-helmet';
-import {Titulo } from '../elementos/Header';
-import Boton from './../elementos/Boton';
-import {ContenedorBoton, Formulario, Input,IconoInicio } from './../elementos/ElementosFormularios';
 import {  signInWithEmailAndPassword } from "firebase/auth";
 import {auth} from './../firebase/firebaseConfig';
 import Alerta from './../elementos/Alerta';
 import {useNavigate} from 'react-router-dom';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
-import Contenedor from './../elementos/Contenedor';
+import { Link } from 'react-router-dom'
 const IniciarSesion = () => {
     const navigate = useNavigate();
    
@@ -76,45 +73,42 @@ const handleSubmit = async (e) =>{ //Para obtener los datos de los inputs
         
 }
     return (  
-      <>
-      <Helmet>
+      <div>
+        <Helmet>
           <title>Iniciar Sesion</title>
-      </Helmet>
-    
-      <IconoInicio icon={faCircleUser}/>
-      <Contenedor>
-      <Titulo> Iniciar Sesion </Titulo> 
-      <Formulario onSubmit={handleSubmit}>
-        <Input
-                  type='email'
-                  name='email'
-                  placeholder='Ingresa tu correo'
-                  value = {email}
-                  onChange={handleChange}
-              />
-          <Input
-                  type='password'
-                  name='password'
-                  placeholder='Contraseña'
-                  value={password}
-                  onChange={handleChange}
-              />
-          
-          <ContenedorBoton>
-              <Boton as="button" type="submit"> Iniciar Sesion </Boton>
-              <Boton to='/crear-cuenta'> Registrarse </Boton>
-              <Boton to="/Reset-password"> ¿Olvidaste la contraseña? </Boton>
-          </ContenedorBoton>  
-            
-
-      </Formulario>
-      </Contenedor>
-      <Alerta
+        </Helmet>  
+        <section className='login'>
+            <div className='loginContainer'> 
+                <h1>Iniciar Sesión</h1>
+                <form onSubmit={handleSubmit}>
+                    <label> Correo </label>
+                    <input
+                        type='email'
+                        name='email'
+                        value = {email}
+                        onChange={handleChange}
+                    />
+                    <label> Contraseña </label>
+                    <input
+                        type='password'
+                        name='password'
+                        value = {password}
+                        onChange={handleChange}
+                    />
+                    <div className='btnContainer'>
+                        <button type='submit'>Iniciar Sesión</button>
+                        <p>¿No tienes cuenta? <Link to='/crear-cuenta'><span> Registrate</span></Link></p>
+                        <p>¿Olvidaste tu contraseña? <Link to='/forgot-password'><span> Reestablecer Contraseña</span></Link></p>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <Alerta
         tipo={alerta.tipo}
         mensaje={alerta.mensaje}
         estadoAlerta={estadoAlerta}
         cambiarEdoAlerta={cambiarEdoAlerta}/>
-  </>
+      </div>
     );
 }
  

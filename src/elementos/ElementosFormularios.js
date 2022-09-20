@@ -9,7 +9,7 @@ const colores = {
     exito: '#1ed12d',
 }
 const IconoInicio = styled(FontAwesomeIcon)`
-    color: #730c0d;
+    color: #560000;
     margin-left: 660px;
     z-index: 100;
     font-size: 150px;

@@ -7,12 +7,12 @@ const home = () => {
       <nav>
         <h2>Bienvenido</h2>
         <div className="menu">
-          <button><Link to='/login'>Inicia Sesión</Link></button>
-          <button><Link to='/signup'>Registrate</Link></button>
+          <button><Link to='/iniciar-sesion'>Inicia Sesión</Link></button>
+          <button><Link to='/crear-cuenta'>Registrate</Link></button>
         </div>
       </nav>
     </div>
   )
 }
 
-export default home
+export default home;
