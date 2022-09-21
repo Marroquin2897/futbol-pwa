@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import { Helmet } from 'react-helmet';
+import {Titulo} from '../elementos/Header';
+import Boton from './../elementos/Boton';
+import {BotonCentrado, Formulario, Input,IconoInicio } from './../elementos/ElementosFormularios';
 import {auth} from './../firebase/firebaseConfig';
 import {useNavigate} from 'react-router-dom';
 import {  createUserWithEmailAndPassword } from "firebase/auth";
@@ -7,7 +10,6 @@ import Alerta from './../elementos/Alerta';
 import {db} from './../firebase/firebaseConfig';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { addDoc, collection } from 'firebase/firestore';
-import { Link } from 'react-router-dom'
 
 
 const RegistroUsuarios = () => {
@@ -174,99 +176,92 @@ const RegistroUsuarios = () => {
             
     }
     return ( 
-        <div>
-            <Helmet>
-                <title>Registrarse</title>
-            </Helmet>
-            <section className='login'>
-                <div className='loginContainer'>
-                    <h1>Crear Cuenta</h1>
-                    <form onSubmit={handleSubmit}>
-                        <label>Nombre(s)</label>
-                        <input
-                            type='text'
-                            name='nombre'
-                            placeholder='Ingresa tu nombre(s)'
-                            value={nombre}
-                            onChange={handleChange}
-                        />
-                        <label>Apellidos</label>
-                        <input
-                            type='text'
-                            name='apellidos'
-                            placeholder='Ingresa tu apellidos(s)'
-                            value={apellidos}
-                            onChange={handleChange}
-                        />
-                        <label>Fecha de Nacimiento</label>
-                        <input
-                            type='date'
-                            name='fechaNac'
-                            value={fechaNac}
-                            onChange={handleChange}
-                        />
-                        <label>Telefono</label>
-                        <input
-                            type='text'
-                            name='telefono'
-                            placeholder='Ingresa tu telefono 10 digitos'
-                            value={telefono}
-                            onChange={handleChange}
-                        />
-                        <label>Dirección</label>
-                        <input
-                            type='text'
-                            name='direccion'
-                            placeholder='Calle No. Ext No. Int Col. CP Municipio/Alcaldia'
-                            value={direccion}
-                            onChange={handleChange}
-                        />
-                        <label>Boleta o No. Empleado</label>
-                        <input
-                            type='text'
-                            name='boleta'
-                            placeholder='Boleta (Alumno) o No. Empleado (Profesor)'
-                            value={boletaempleado}
-                            onChange={handleChange}
-                        />
-                        <label>Correo</label>
-                        <input
-                            type='email'
-                            name='email'
-                            placeholder='Ingresa tu correo'
-                            value={email}
-                            onChange={handleChange}
-                        />
-                        <label>Contraseña</label>
-                        <input
-                            type='password'
-                            name='password'
-                            placeholder='Ingresa una contraseña'
-                            value={password}
-                            onChange={handleChange}
-                        />
-                        <label>Confirmar Contraseña</label>
-                        <input
-                            type='password'
-                            name='password2'
-                            placeholder='Confirma tu contraseña'
-                            value={password2}
-                            onChange={handleChange}
-                        />
-                        <div className='btnContainer'>
-                            <button type='submit'> Crear Cuenta</button>
-                            <p>¿Ya tienes una cuenta? <Link to='/iniciar-sesion'><span>Inicia Sesión</span></Link></p>
-                        </div>
-                    </form>
-                </div>
-            </section>
-            <Alerta 
+        <>
+        <Helmet>
+            <title>Crear Cuenta</title>
+        </Helmet>
+        <IconoInicio icon={faCircleUser}/>
+        <Titulo> Crear Cuenta </Titulo> 
+        
+        <Formulario onSubmit={handleSubmit}>
+            
+            <Input
+                type='text'
+                name='nombre'
+                placeholder='Ingresa tu nombre(s)'
+                value={nombre}
+                onChange={handleChange}
+            />
+            <Input
+                type='text'
+                name='apellidos'
+                placeholder='Ingresa tu apellido(s)'
+                value={apellidos}
+                onChange={handleChange}
+            />
+            <Input
+                type='date'
+                name='fechaNac'
+                value={fechaNac}
+                onChange={handleChange}
+            />
+            <Input
+                type='text'
+                name='telefono'
+                placeholder='Ingresa tu telefono 10 digitos'
+                value={telefono}
+                onChange={handleChange}
+            />
+            <Input
+                type='text'
+                name='direccion'
+                value={direccion}
+                onChange={handleChange}
+                placeholder='Calle No. Ext No. Int Col. CP Municipio/Alcaldia'
+            />
+            <Input
+                type='text'
+                name='boleta'
+                value={boletaempleado}
+                onChange={handleChange}
+                placeholder='Boleta (Alumno) o No. Empleado (Profesor)'
+            />
+            
+            <Input
+                type='email'
+                name='email'
+                placeholder='Ingresa tu correo'
+                value={email}
+                onChange={handleChange}
+            />
+            <Input
+                type='password'
+                name='password'
+                placeholder='Contraseña'
+                value={password}
+                onChange={handleChange}
+            />
+            <Input
+                type='password'
+                name='password2'
+                placeholder='Confirmar contraseña'
+                value={password2}
+                onChange={handleChange}
+            />       
+            <BotonCentrado>
+                <Boton as="button" type="submit"> Crear Cuenta </Boton> 
+                <p></p>
+                <Boton  to='/iniciar-sesion'> Iniciar Sesión </Boton>     
+            </BotonCentrado>
+        
+        </Formulario> 
+        <Alerta 
             tipo= {alerta.tipo}
             mensaje= {alerta.mensaje}
             estadoAlerta={estadoAlerta}
             cambiarEdoAlerta={cambiarEdoAlerta}
-        />    
-        </div>
+        />
+    </>
      );
 }
  

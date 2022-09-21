@@ -16,7 +16,7 @@ const ForgotPassword = () => {
             setMensaje('');
             setError('');
             setLoading(true);
-            await resetPassword(emailRes.current.value)
+            await resetPassword(emailRes.current.value) //Funcion para reestablecer password 
             setMensaje('Revisa tu bandeja de entrada y sigue las instrucciones');
            
         }
