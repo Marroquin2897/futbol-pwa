@@ -3,18 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import {Titulo} from '../elementos/Header';
 import {db} from './../firebase/firebaseConfig';
+import useObtenerJugadores from '../hooks/useObtenerJugadores';
 
-const VerJugadores = () => {
-
-    const[input,setInput] = useState('');
-    const[dato,setData] = useState([]);
+const ListaJugadores = () => {
+    const jugadores = useObtenerJugadores();
+    console.log(jugadores);
     
-    useEffect(() => {
-       db.collection('jugadores').onSnapshot(snapshot => {
-            setData(snapshot.docs.map(doc => ({id:doc.id,dato:doc.data().dato})))
-       })
-    },[])
-
     
     return ( 
         <>
@@ -27,4 +21,4 @@ const VerJugadores = () => {
      );
 }
  
-export default VerJugadores;
+export default ListaJugadores;
