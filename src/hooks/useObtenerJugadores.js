@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import {db} from './../firebase/firebaseConfig';
 import { collection, onSnapshot,query,orderBy,where,limit } from 'firebase/firestore';
+import {useAuth} from './../contextos/AuthContext';
 
 const useObtenerJugadores = () => {
     const[jugadores,cambiarJugadores] = useState([]);
@@ -13,7 +14,7 @@ const useObtenerJugadores = () => {
             orderBy('nombre','asc'),
             limit(15)
         );
-
+       
         const unsuscribe = onSnapshot(consulta,(snapshot) => {
             cambiarJugadores(snapshot.docs.map((jugador) => {
                 console.log(jugador.data())

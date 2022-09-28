@@ -9,7 +9,51 @@ import Alerta from './../elementos/Alerta';
 import ContenedorDiv from './../elementos/ContenedorDiv';
 import {db} from './../firebase/firebaseConfig';
 import {collection, addDoc} from 'firebase/firestore';
+import {useAuth} from './../contextos/AuthContext';
+import Select from 'react-select';
 
+const escuelas = [
+    {label: 'CET 1 Walter Cross Buchanan', value:'I517100'},
+    {label: 'CECyT No. 1 Gonzalo Vázquez Vela', value:'I501100'},
+    {label: 'CECyT No. 2 Miguel Bernard', value:'I502100'},
+    {label: 'CECyT No. 3 Estanislao Ramírez Ruiz', value:'I503100'},
+    {label: 'CECyT No. 4 Lázaro Cárdenas', value:'I504100'},
+    {label: 'CECyT No. 5 Benito Juárez', value:'I505300'},
+    {label: 'CECyT No. 6 Miguel Othón de Mendizábal', value:'I506200'},
+    {label: 'CECyT No. 7 Cuauhtémoc', value:'I507100'},
+    {label: 'CECyT No. 8 Narciso Bassols', value:'I508100'},
+    {label: 'CECyT No. 9 Juan de Dios Bátiz', value:'I509100'},
+    {label: 'CECyT No. 10 Carlos Vallejo Márquez', value:'I510100'},
+    {label: 'CECyT No. 11 Wilfrido Massieu', value:'I511100'},
+    {label: 'CECyT No. 12 José María Morelos', value:'I512300'},
+    {label: 'CECyT No. 13 Ricardo Flores Magón', value:'I513300'},
+    {label: 'CECyT No. 14 Luis Enrique Erro', value:'I514300'},
+    {label: 'CECyT No. 15 Diódoro Antúnez Echegaray', value:'I515200'},
+    {label: 'CICS Unidad Santo Tomás', value:'09DPN0009J'},
+    {label: 'CICS Unidad Milpa Alta', value:'09DPN7110T'},
+    {label: 'ENCB', value:'09DPN5893Y'},
+    {label: 'ENMyH', value:'09DPN0063D'},
+    {label: 'ESCA Unidad Santo Tomás', value:'09DPN0050Z'},
+    {label: 'ESCA Unidad Tepepan', value:'09DPN0075I'},
+    {label: 'ESCOM', value:'09DPN0053X'},
+    {label: 'ESE', value:'09DPN0049K'},
+    {label: 'ESEO', value:'09DPN0004O'},
+    {label: 'ESFM', value:'09DPN5892Z'},
+    {label: 'ESIME Unidad Zacatenco', value:'09DPN5904N'},
+    {label: 'ESIME Unidad Azcapotzalco', value:'09DPN0078F'},
+    {label: 'ESIME Unidad Culhuacán', value:'09DPN0074J'},
+    {label: 'ESIME Unidad Ticomán', value:'09DPN0022D'},
+    {label: 'ESIQIE', value:'09DPN5895W'},
+    {label: 'ESIT', value:'09DPN5898T'},
+    {label: 'ESIA Unidad Tecamachalco', value:'15DPN0001B'},
+    {label: 'ESIA Unidad Ticomán', value:'09DPN0023C'},
+    {label: 'ESIA Unidad Zacatenco', value:'09DPN5901Q'},
+    {label: 'ESM', value:'09DPN0365Z'},
+    {label: 'EST', value:'09DPN6804V'},
+    {label: 'UPIBI', value:'09DPN0003P'},
+    {label: 'UPIICSA', value:'09DPN6203B'},
+    {label: 'UPIITA', value:'09DPN0020F'},
+]
 const RegistrarJugador = () => {
     const [nombre, cambiarNombre] = useState('');
     const [apellidos, cambiarApellidos] = useState('');
@@ -20,7 +64,13 @@ const RegistrarJugador = () => {
     const [semestre, cambiarSemestre] = useState('');
     const[estadoAlerta,cambiarEdoAlerta] = useState(false);
     const[alerta,cambiarAlerta] = useState({});
+    const{usuario} = useAuth(); 
+    let[escuela,cambiarEscuela] = useState('');
 
+    const onDropdownChangeEsc = (value) => {
+        console.log(value);
+        cambiarEscuela(value);
+    }
     const handleChange = (e) => {
         switch(e.target.name){
             case 'nombre':
@@ -43,7 +93,10 @@ const RegistrarJugador = () => {
                 break; 
             case 'semestre':
                 cambiarSemestre(e.target.value);
-                break;   
+                break;  
+            case 'escuela':
+                cambiarEscuela(e.target.value);
+                break;      
             default:
                 break;
         }
@@ -54,7 +107,7 @@ const RegistrarJugador = () => {
         e.preventDefault();
         cambiarEdoAlerta(false);
         cambiarAlerta({});
-        if(nombre === '' || apellidos === '' || fechanac ==='' || nss === '' || curp ===''|| boleta ==='' || semestre ===''){
+        if(nombre === '' || apellidos === '' || fechanac ==='' || nss === '' || curp ===''|| boleta ==='' || semestre ==='' || escuela === ''){
             cambiarEdoAlerta(true);
             cambiarAlerta({
                 tipo: 'error',
@@ -70,8 +123,9 @@ const RegistrarJugador = () => {
                 nss: nss,
                 curp: curp,
                 boleta: boleta,
-                semestre: semestre
-
+                semestre: semestre,
+                escuela: escuela,
+                uidUsuario: usuario.uid
                 
             });
             cambiarAlerta({
@@ -93,6 +147,7 @@ const RegistrarJugador = () => {
         cambiarCurp('');
         cambiarBoleta('');
         cambiarSemestre('');
+        cambiarEscuela('');
     }
 
     return ( 
@@ -153,6 +208,12 @@ const RegistrarJugador = () => {
                     placeholder='Semestre del alumno(a)' 
                     value={semestre}     
                     onChange={handleChange} 
+                /> 
+                <Select
+                    name='escuela'
+                    placeholder='Selecciona la escuela'
+                    options = {escuelas}
+                    onChange= {onDropdownChangeEsc}
                 />   
                 <ContenedorBoton>
                 <Boton as="button" type="submit"> Registrar Jugador </Boton>  

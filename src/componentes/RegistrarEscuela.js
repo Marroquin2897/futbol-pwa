@@ -10,6 +10,8 @@ import Select from 'react-select';
 import {db} from './../firebase/firebaseConfig';
 import {collection, addDoc} from 'firebase/firestore';
 import {useNavigate} from 'react-router-dom';
+import {useAuth} from './../contextos/AuthContext';
+
 const modalidades= [
     {label: 'Fútbol 7', value:'1'},
     {label: 'Fútbol Asociación', value:'2'},
@@ -59,6 +61,7 @@ const escuelas = [
 ]
 const RegistrarEscuela = () => {
 const navigate = useNavigate();
+const{usuario} = useAuth();
 let[escuela,cambiarEscuela] = useState('');
 let [modalidad, cambiarModalidad] = useState('');
 let[clave, cambiarClave] = useState('');
@@ -83,8 +86,8 @@ let[clave, cambiarClave] = useState('');
             
             clave: clave,
             escuela: escuela,
-            modalidad: modalidad
-            
+            modalidad: modalidad,
+            uidUsuario: usuario.uid
         }); 
         
         } catch(error){
