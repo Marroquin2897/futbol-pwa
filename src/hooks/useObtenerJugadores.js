@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {db} from './../firebase/firebaseConfig';
-import { collection, onSnapshot,query,orderBy,where,limit } from 'firebase/firestore';
+import { collection, onSnapshot,query,where,limit } from 'firebase/firestore';
 import {useAuth} from './../contextos/AuthContext';
 
 const useObtenerJugadores = () => {
@@ -8,10 +8,10 @@ const useObtenerJugadores = () => {
     const {usuario} = useAuth();
 
     useEffect(() => { //Consulta para obtener la lista de jugadores
+        
         const consulta = query(
             collection(db,'jugadores'),
-            where('uidUsuario','==',usuario.id),
-            orderBy('nombre','asc'),
+            where('uidUsuario','==',usuario.uid),
             limit(15)
         );
        

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import {Titulo} from '../elementos/Header';
-import useObtenerJugadores from '../hooks/useObtenerJugadores';
+import useObtenerJugadores from './../hooks/useObtenerJugadores';
 import {
     Lista,
     ElementoLista,
@@ -21,9 +21,7 @@ import {
 
 const ListaJugadores = () => {
     const jugadores = useObtenerJugadores();
-  
-    
-    
+       
     return ( 
         <>
         <Helmet>
@@ -32,12 +30,14 @@ const ListaJugadores = () => {
         <Titulo> Jugadores: </Titulo> 
         
         <Lista>
-            {jugadores.map((jugador) => {
+            {jugadores.map((jugador,index) => {
                 return(
-                    <ElementoLista key={jugador.id}>
+                    <ElementoLista key={index}>
                         <Nombre>
-                            {jugador.nombre}
+                            {jugador.Nombre}
+                            {console.log(jugador.nombre)}
                         </Nombre>
+                       
                     </ElementoLista>
                 );
             })}
