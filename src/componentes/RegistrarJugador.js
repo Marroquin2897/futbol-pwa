@@ -7,11 +7,9 @@ import {ContenedorBoton, Formulario, Input } from './../elementos/ElementosFormu
 import Boton from './../elementos/Boton';
 import Alerta from './../elementos/Alerta';
 import ContenedorDiv from './../elementos/ContenedorDiv';
-import {db} from './../firebase/firebaseConfig';
-import {collection, addDoc} from 'firebase/firestore';
 import {useAuth} from './../contextos/AuthContext';
 import Select from 'react-select';
-
+import agregarJugador from './../firebase/agregarJugadores';
 const escuelas = [
     {label: 'CET 1 Walter Cross Buchanan', value:'I517100'},
     {label: 'CECyT No. 1 Gonzalo Vázquez Vela', value:'I501100'},
@@ -103,11 +101,9 @@ const RegistrarJugador = () => {
     }
     
     const handleSubmit = async (e) => {
-        let mensaje;
         e.preventDefault();
-        cambiarEdoAlerta(false);
-        cambiarAlerta({});
         if(nombre === '' || apellidos === '' || fechanac ==='' || nss === '' || curp ===''|| boleta ==='' || semestre ==='' || escuela === ''){
+            
             cambiarEdoAlerta(true);
             cambiarAlerta({
                 tipo: 'error',
@@ -116,8 +112,8 @@ const RegistrarJugador = () => {
             return;
         }
         try{
-            await addDoc(collection(db,'jugadores'),{
-                nombre:nombre,
+           agregarJugador({
+                nombre: nombre,
                 apellidos: apellidos,
                 fechanac: fechanac,
                 nss: nss,
@@ -126,28 +122,26 @@ const RegistrarJugador = () => {
                 semestre: semestre,
                 escuela: escuela,
                 uidUsuario: usuario.uid
-                
-            });
+            }); 
+            
+        } catch(error){
+            cambiarAlerta({
+                tipo:'error',
+                mensaje: 'Error al registrar jugador'
+               });
+        }
             cambiarAlerta({
                 tipo:'exito',
                 mensaje: "Jugador registrado exitosamente"
-               });
-            
-        } 
-        catch(error){
-            cambiarAlerta({
-                tipo:'error',
-                mensaje: mensaje
-               });
-        }
-        cambiarNombre('');
-        cambiarApellidos('');
-        cambiarFechaNac('');
-        cambiarNss('');
-        cambiarCurp('');
-        cambiarBoleta('');
-        cambiarSemestre('');
-        cambiarEscuela('');
+            });
+           cambiarNombre('');
+           cambiarApellidos('');
+           cambiarFechaNac('');
+           cambiarNss('');
+           cambiarCurp('');
+           cambiarBoleta('');
+           cambiarSemestre('');
+           cambiarEscuela('');
     }
 
     return ( 

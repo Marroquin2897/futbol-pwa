@@ -19,8 +19,10 @@ import {
     Subtitulo
 } from './../elementos/ElementosDeLista';
 
+
 const ListaJugadores = () => {
-    const jugadores = useObtenerJugadores();
+    const [jugadores] = useObtenerJugadores();
+    
        
     return ( 
         <>
@@ -30,14 +32,13 @@ const ListaJugadores = () => {
         <Titulo> Jugadores: </Titulo> 
         
         <Lista>
-            {jugadores.map((jugador,index) => {
+            {jugadores.map((jugador) => {
                 return(
-                    <ElementoLista key={index}>
+                    <ElementoLista key={jugador.id}>
                         <Nombre>
-                            {jugador.Nombre}
-                            {console.log(jugador.nombre)}
+                           {jugador.nombre} 
                         </Nombre>
-                       
+                        
                     </ElementoLista>
                 );
             })}

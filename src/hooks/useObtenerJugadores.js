@@ -17,13 +17,15 @@ const useObtenerJugadores = () => {
        
         const unsuscribe = onSnapshot(consulta,(snapshot) => {
             cambiarJugadores(snapshot.docs.map((jugador) => {
-                console.log(jugador.data())
+                
                 return{...jugador.data(), id: jugador.id}
             }));
         });
         return unsuscribe;
     },[usuario]);
+    
     return [jugadores];
+    
 }
  
 export default useObtenerJugadores;
