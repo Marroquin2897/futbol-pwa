@@ -10,6 +10,7 @@ import RegistrarEscuela from './componentes/RegistrarEscuela';
 import RegistrarJugador from './componentes/RegistrarJugador';
 import ListaJugadores from './componentes/ListaJugadores';
 import ListaEscuelas from './componentes/ListaEscuelas';
+import EditarJugador from './componentes/EditarJugador';
 import {Helmet} from 'react-helmet';
 import favicon from './imagenes/icono2-burrito.png';
 import InterfazInicio from './componentes/InterfazInicio';
@@ -65,7 +66,11 @@ const Index = () => {
                 <ListaEscuelas/>
               </RutaPrivada>
             }/>
-          
+            <Route path="/editar-jugador" element={
+              <RutaPrivada>
+                <EditarJugador/>
+              </RutaPrivada>
+            }/>
           </Routes>
           <App/>
         </BrowserRouter>

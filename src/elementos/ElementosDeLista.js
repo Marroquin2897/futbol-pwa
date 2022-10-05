@@ -54,9 +54,27 @@ const ElementoListaCategorias = styled.li`
 `;
  
 const Nombre = styled.div`
+    color: #FFFFFF;
     font-weight: 500;
     font-size: 1.25rem; /* 20px */
-    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    
+    svg {
+        width: 3.12rem; /* 50px */
+        height: auto;
+        margin-right: 1.25rem; /* 20px */
+        border-radius: 0.62rem; /* 10px */
+    }
+ 
+    @media (max-width: 50rem) { /* 80px */
+        font-size: 1.12rem;
+    }
+`;
+const Apellidos = styled.div`
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 1.25rem; /* 20px */
     display: flex;
     align-items: center;
     
@@ -82,6 +100,7 @@ const Escuela = styled.div`
 `;
  
 const Boleta = styled.div`
+    color: #FFFFFF;
     font-size: 1.25rem; /* 20px */
     font-weight: 700;
     justify-content: end;
@@ -164,13 +183,13 @@ const ContenedorBotonCentral = styled.div`
 `;
  
 const BotonCargarMas = styled.button`
-    background: ${theme.grisClaro};
+    background: #560000;
     border: none;
     border-radius: 7px;
-    color: #000;
+    color: #fff;
     font-family: 'Work Sans', sans-serif;
     padding: 1rem 1.87rem; /* 20px 30px */
-    
+
     font-size: 1.25rem; /* 20px */
     font-weight: 500;
     cursor: pointer;
@@ -180,9 +199,9 @@ const BotonCargarMas = styled.button`
     align-items: center;
     outline: none;
     transition: .3s ease all;
- 
+
     &:hover {
-        background: ${theme.grisClaro2};
+        box-shadow: 3px 0px 30px rgba(163,163,163,1);
     }
 `;
  
@@ -192,6 +211,7 @@ export {
     ListaDeCategorias,
     ElementoListaCategorias,
     Nombre,
+    Apellidos,
     Escuela,
     Boleta,
     Fecha,
