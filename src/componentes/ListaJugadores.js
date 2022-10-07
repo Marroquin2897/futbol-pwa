@@ -11,13 +11,9 @@ import Boton from './../elementos/Boton';
 import {
     Lista,
     ElementoLista,
-    ListaDeCategorias,
-    ElementoListaCategorias,
     Nombre,
     Apellidos,
-    Escuela,
     Boleta,
-    Fecha,
     ContenedorBotones,
     BotonAccion,
     BotonCargarMas,
@@ -28,7 +24,7 @@ import {
 
 
 const ListaJugadores = () => {
-    const [jugadores] = useObtenerJugadores();
+    const [jugadores,obtenerMasJugadores,hayMasPorCargar] = useObtenerJugadores();
     
        
     return ( 
@@ -63,9 +59,12 @@ const ListaJugadores = () => {
                     </ElementoLista>
                 );
             })}
-            <ContenedorBotonCentral>
-                <BotonCargarMas> Cargas más </BotonCargarMas>
-            </ContenedorBotonCentral>
+            {hayMasPorCargar && 
+                <ContenedorBotonCentral>
+                    <BotonCargarMas onClick={() => obtenerMasJugadores()}> Cargas más </BotonCargarMas>
+                </ContenedorBotonCentral>
+            }
+            
 
             {jugadores.length === 0 &&
                 <ContenedorSubtitulo>
