@@ -61,11 +61,7 @@ const Index = () => {
                 <ListaJugadores/>
               </RutaPrivada>
             }/>
-            <Route path="/lista-escuelas" element={
-              <RutaPrivada>
-                <ListaEscuelas/>
-              </RutaPrivada>
-            }/>
+            
             <Route path="/editar-jugador" element={
               <RutaPrivada>
                 <EditarJugador/>

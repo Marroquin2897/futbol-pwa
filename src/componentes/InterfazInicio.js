@@ -22,7 +22,7 @@ const InterfazInicio = () => {
         <Boton to="/registrar-escuela"> Registrar Escuela </Boton>
         <Boton to="/registrar-jugador"> Registrar Jugador </Boton>
         <Boton to="/lista-jugadores"> Lista de Jugadores </Boton>
-        <Boton to="/lista-escuelas"> Lista de Escuelas </Boton>
+        
     </ContenedorBoton>  
       
       

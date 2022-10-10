@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import { Helmet } from 'react-helmet';
 import {Titulo} from '../elementos/Header';
 import { faFutbol } from '@fortawesome/free-solid-svg-icons';
@@ -10,6 +10,8 @@ import ContenedorDiv from './../elementos/ContenedorDiv';
 import {useAuth} from './../contextos/AuthContext';
 import Select from 'react-select';
 import agregarJugador from './../firebase/agregarJugadores';
+import {useNavigate} from 'react-router-dom';
+import editarJugador from './../firebase/editarJugador';
 const escuelas = [
     {label: 'CET 1 Walter Cross Buchanan', value:'I517100'},
     {label: 'CECyT No. 1 Gonzalo Vázquez Vela', value:'I501100'},
@@ -52,7 +54,7 @@ const escuelas = [
     {label: 'UPIICSA', value:'09DPN6203B'},
     {label: 'UPIITA', value:'09DPN0020F'},
 ]
-const RegistrarJugador = () => {
+const RegistrarJugador = ({jugador}) => {
     const [nombre, cambiarNombre] = useState('');
     const [apellidos, cambiarApellidos] = useState('');
     const [fechanac, cambiarFechaNac] = useState('');
@@ -64,11 +66,26 @@ const RegistrarJugador = () => {
     const[alerta,cambiarAlerta] = useState({});
     const{usuario} = useAuth(); 
     let[escuela,cambiarEscuela] = useState('');
+    const navigate = useNavigate();
 
     const onDropdownChangeEsc = (value) => {
         console.log(value);
         cambiarEscuela(value);
     }
+
+    useEffect(()=> { //Comprobar que haya jugador y que sea del usuario actual
+        if(jugador){
+
+            if(jugador.data().uidUsuario === usuario.uid){
+                cambiarNss(jugador.data().nss);
+                cambiarBoleta(jugador.data().boleta);
+                cambiarSemestre(jugador.data().semestre);
+            } else{
+                navigate('/lista-jugadores');
+            }
+        }
+    },[jugador,usuario]);
+
     const handleChange = (e) => {
         switch(e.target.name){
             case 'nombre':
@@ -103,45 +120,52 @@ const RegistrarJugador = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(nombre === '' || apellidos === '' || fechanac ==='' || nss === '' || curp ===''|| boleta ==='' || semestre ==='' || escuela === ''){
-            
-            cambiarEdoAlerta(true);
-            cambiarAlerta({
-                tipo: 'error',
-                mensaje:'Completa todos los campos'
-            });
-            return;
+            if(jugador){
+                editarJugador({
+                    id: jugador.id,
+                    nss: nss,
+                    boleta: boleta,
+                    semestre: semestre
+                }).then(()=>{
+                    navigate('/registrar-jugador');
+                }).catch((error)=> {
+                    console.log(error);
+                })
+            } else{
+                agregarJugador({
+                    nombre: nombre,
+                    apellidos: apellidos,
+                    fechanac: fechanac,
+                    nss: nss,
+                    curp: curp,
+                    boleta: boleta,
+                    semestre: semestre,
+                    escuela: escuela,
+                    uidUsuario: usuario.uid
+                })
+                .then(()=> {
+                    cambiarNombre('');
+                    cambiarApellidos('');
+                    cambiarFechaNac('');
+                    cambiarNss('');
+                    cambiarCurp('');
+                    cambiarBoleta('');
+                    cambiarSemestre('');
+                    cambiarEscuela('');
+
+                    cambiarEdoAlerta(true);
+                    cambiarAlerta({tipo:'exito',mensaje:'Jugador registrado exitosamente'});
+                })
+                .catch((error)=> {
+                    cambiarEdoAlerta(true);
+                    cambiarAlerta({tipo:'error',mensaje:'Hubo un problema al intentar agregar al jugador'});
+                })
+            }    
         }
-        try{
-           agregarJugador({
-                nombre: nombre,
-                apellidos: apellidos,
-                fechanac: fechanac,
-                nss: nss,
-                curp: curp,
-                boleta: boleta,
-                semestre: semestre,
-                escuela: escuela,
-                uidUsuario: usuario.uid
-            }); 
-            
-        } catch(error){
-            cambiarAlerta({
-                tipo:'error',
-                mensaje: 'Error al registrar jugador'
-               });
-        }
-            cambiarAlerta({
-                tipo:'exito',
-                mensaje: "Jugador registrado exitosamente"
-            });
-           cambiarNombre('');
-           cambiarApellidos('');
-           cambiarFechaNac('');
-           cambiarNss('');
-           cambiarCurp('');
-           cambiarBoleta('');
-           cambiarSemestre('');
-           cambiarEscuela('');
+        else{
+                cambiarEdoAlerta(true);
+                    cambiarAlerta({tipo:'error',mensaje:'Por favor completa todos los campos'});
+            }       
     }
 
     return ( 
@@ -210,7 +234,9 @@ const RegistrarJugador = () => {
                     onChange= {onDropdownChangeEsc}
                 />   
                 <ContenedorBoton>
-                <Boton as="button" type="submit"> Registrar Jugador </Boton>  
+                <Boton as="button" type="submit"> 
+                    {jugador ? 'Editar Jugador' : 'Agregar Jugador'}
+                </Boton>  
                 </ContenedorBoton>
 
             </Formulario>
