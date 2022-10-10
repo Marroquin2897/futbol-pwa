@@ -7,7 +7,7 @@ import {ReactComponent as IconoPersona} from './../imagenes/persona.svg';
 import useObtenerJugadores from './../hooks/useObtenerJugadores';
 import { Link } from 'react-router-dom';
 import Boton from './../elementos/Boton';
-
+import borrarJugador from './../firebase/borrarJugador';
 import {
     Lista,
     ElementoLista,
@@ -52,7 +52,7 @@ const ListaJugadores = () => {
                             <BotonAccion as={Link} to={`/editar-jugador/${jugador.id}`}>
                                 <IconoEditar/>     
                             </BotonAccion>
-                            <BotonAccion>
+                            <BotonAccion onClick={() => borrarJugador(jugador.id)}>
                                 <IconoBorrar/>
                             </BotonAccion>
                         </ContenedorBotones>
