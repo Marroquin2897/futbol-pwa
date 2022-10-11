@@ -12,6 +12,7 @@ import Select from 'react-select';
 import agregarJugador from './../firebase/agregarJugadores';
 import {useNavigate} from 'react-router-dom';
 import editarJugador from './../firebase/editarJugador';
+
 const escuelas = [
     {label: 'CET 1 Walter Cross Buchanan', value:'I517100'},
     {label: 'CECyT No. 1 Gonzalo Vázquez Vela', value:'I501100'},
@@ -77,10 +78,12 @@ const RegistrarJugador = ({jugador}) => {
         if(jugador){
 
             if(jugador.data().uidUsuario === usuario.uid){
+                
                 cambiarNss(jugador.data().nss);
+                cambiarCurp(jugador.data().curp);
                 cambiarBoleta(jugador.data().boleta);
                 cambiarSemestre(jugador.data().semestre);
-            } else{
+            } else{ //Mandarlo a la lista de jugadores que si pueda editar
                 navigate('/lista-jugadores');
             }
         }
@@ -124,10 +127,11 @@ const RegistrarJugador = ({jugador}) => {
                 editarJugador({
                     id: jugador.id,
                     nss: nss,
+                    curp: curp,
                     boleta: boleta,
                     semestre: semestre
                 }).then(()=>{
-                    navigate('/registrar-jugador');
+                    navigate('/lista-jugadores'); //cuando termine de editar que pase a la lista de jugadores
                 }).catch((error)=> {
                     console.log(error);
                 })

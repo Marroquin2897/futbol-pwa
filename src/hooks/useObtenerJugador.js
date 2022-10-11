@@ -7,7 +7,7 @@ const useObtenerJugador = (id) => {
 	const navigate = useNavigate();
 	const [jugador, establecerJugador] = useState('');
 	
-	useEffect(() => {
+	useEffect(() => { //Acceder a la BD una sola vez 
 		const obtenerJugador = async() => {
 			const documento = await getDoc(doc(db, 'jugadores', id));
 

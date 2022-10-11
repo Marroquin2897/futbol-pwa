@@ -13,6 +13,8 @@ import {
     ElementoLista,
     Nombre,
     Apellidos,
+    Nss,
+    Curp,
     Boleta,
     ContenedorBotones,
     BotonAccion,
@@ -45,9 +47,16 @@ const ListaJugadores = () => {
                         <Apellidos>
                             {jugador.apellidos}
                         </Apellidos>
+                        <Nss>
+                            {jugador.nss}
+                        </Nss>
+                        <Curp>
+                            {jugador.curp}
+                        </Curp>
                         <Boleta>
                             {jugador.boleta}
                         </Boleta>
+
                         <ContenedorBotones>
                             <BotonAccion as={Link} to={`/editar-jugador/${jugador.id}`}>
                                 <IconoEditar/>     

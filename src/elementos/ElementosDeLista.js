@@ -89,15 +89,44 @@ const Apellidos = styled.div`
         font-size: 1.12rem;
     }
 `;
+const Nss = styled.div`
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 1.25rem; /* 20px */
+    display: flex;
+    align-items: center;
+    
+    svg {
+        width: 3.12rem; /* 50px */
+        height: auto;
+        margin-right: 1.25rem; /* 20px */
+        border-radius: 0.62rem; /* 10px */
+    }
  
-const Escuela = styled.div`
-    justify-content: center;
-    font-size: 1.25rem;
-    text-transform: capitalize;
-    @media (max-width: 50rem) { /* 50px */
-        justify-content: end;
+    @media (max-width: 50rem) { /* 80px */
+        font-size: 1.12rem;
     }
 `;
+const Curp = styled.div`
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 1.25rem; /* 20px */
+    display: flex;
+    align-items: center;
+    
+    svg {
+        width: 3.12rem; /* 50px */
+        height: auto;
+        margin-right: 1.25rem; /* 20px */
+        border-radius: 0.62rem; /* 10px */
+    }
+ 
+    @media (max-width: 50rem) { /* 80px */
+        font-size: 1.12rem;
+    }
+`;
+ 
+
  
 const Boleta = styled.div`
     color: #FFFFFF;
@@ -212,7 +241,8 @@ export {
     ElementoListaCategorias,
     Nombre,
     Apellidos,
-    Escuela,
+    Nss,
+    Curp,
     Boleta,
     Fecha,
     ContenedorBotones,

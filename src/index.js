@@ -62,7 +62,7 @@ const Index = () => {
               </RutaPrivada>
             }/>
             
-            <Route path="/editar-jugador" element={
+            <Route path="/editar-jugador/:id" element={
               <RutaPrivada>
                 <EditarJugador/>
               </RutaPrivada>
