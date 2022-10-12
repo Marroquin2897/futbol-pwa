@@ -13,6 +13,7 @@ import {
     ElementoLista,
     Nombre,
     Apellidos,
+    Fecha,
     Nss,
     Curp,
     Boleta,

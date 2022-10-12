@@ -9,7 +9,7 @@ import RegistroUsuario from './componentes/RegistroUsuario';
 import RegistrarEscuela from './componentes/RegistrarEscuela';
 import RegistrarJugador from './componentes/RegistrarJugador';
 import ListaJugadores from './componentes/ListaJugadores';
-import ListaEscuelas from './componentes/ListaEscuelas';
+
 import EditarJugador from './componentes/EditarJugador';
 import {Helmet} from 'react-helmet';
 import favicon from './imagenes/icono2-burrito.png';

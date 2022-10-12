@@ -23,7 +23,7 @@ const ElementoLista = styled.li`
     padding: 1.25rem 0; /* 20px */
     border-bottom: 2px solid #F2F2F2;
     display: grid;
-    gap: 0.31rem; /* 5px */
+    gap: 2px; /* 5px */
     justify-content: space-between;
  
     & > div {

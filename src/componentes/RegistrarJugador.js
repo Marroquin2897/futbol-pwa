@@ -1,8 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import { Helmet } from 'react-helmet';
 import {Titulo} from '../elementos/Header';
-import { faFutbol } from '@fortawesome/free-solid-svg-icons';
-import { IconoInicio } from './../elementos/ElementosFormularios';
 import {ContenedorBoton, Formulario, Input } from './../elementos/ElementosFormularios';
 import Boton from './../elementos/Boton';
 import Alerta from './../elementos/Alerta';
@@ -66,11 +64,10 @@ const RegistrarJugador = ({jugador}) => {
     const[estadoAlerta,cambiarEdoAlerta] = useState(false);
     const[alerta,cambiarAlerta] = useState({});
     const{usuario} = useAuth(); 
-    let[escuela,cambiarEscuela] = useState('');
+    const [escuela,cambiarEscuela] = useState('');
     const navigate = useNavigate();
 
     const onDropdownChangeEsc = (value) => {
-        console.log(value);
         cambiarEscuela(value);
     }
 
@@ -122,10 +119,13 @@ const RegistrarJugador = ({jugador}) => {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if(nombre === '' || apellidos === '' || fechanac ==='' || nss === '' || curp ===''|| boleta ==='' || semestre ==='' || escuela === ''){
+        if(nombre === '' || apellidos === '' || fechanac ==='' || nss === '' || curp ===''|| boleta ==='' || semestre ==='' || escuela === '') {
             if(jugador){
                 editarJugador({
                     id: jugador.id,
+                    nombre: nombre,
+                    apellidos: apellidos,
+                    fechanac: fechanac,
                     nss: nss,
                     curp: curp,
                     boleta: boleta,
@@ -135,7 +135,7 @@ const RegistrarJugador = ({jugador}) => {
                 }).catch((error)=> {
                     console.log(error);
                 })
-            } else{
+            } else {
                 agregarJugador({
                     nombre: nombre,
                     apellidos: apellidos,
@@ -163,13 +163,13 @@ const RegistrarJugador = ({jugador}) => {
                 .catch((error)=> {
                     cambiarEdoAlerta(true);
                     cambiarAlerta({tipo:'error',mensaje:'Hubo un problema al intentar agregar al jugador'});
-                })
-            }    
-        }
-        else{
-                cambiarEdoAlerta(true);
-                    cambiarAlerta({tipo:'error',mensaje:'Por favor completa todos los campos'});
-            }       
+                });
+            }  
+        } else {
+			cambiarEdoAlerta(true);
+			cambiarAlerta({tipo: 'error', mensaje: 'Por favor rellena todos los campos.'});
+		} 
+        
     }
 
     return ( 
@@ -177,9 +177,9 @@ const RegistrarJugador = ({jugador}) => {
         <Helmet>
             <title>Registrar Jugador</title>
         </Helmet>
-        <IconoInicio icon={faFutbol}/>
+        
         <Titulo> Registrar Jugador </Titulo> 
-        <ContenedorDiv>
+        
             <Formulario onSubmit={handleSubmit}>
             
                 <Input
@@ -231,12 +231,7 @@ const RegistrarJugador = ({jugador}) => {
                     value={semestre}     
                     onChange={handleChange} 
                 /> 
-                <Select
-                    name='escuela'
-                    placeholder='Selecciona la escuela'
-                    options = {escuelas}
-                    onChange= {onDropdownChangeEsc}
-                />   
+                  
                 <ContenedorBoton>
                 <Boton as="button" type="submit"> 
                     {jugador ? 'Editar Jugador' : 'Agregar Jugador'}
@@ -244,7 +239,7 @@ const RegistrarJugador = ({jugador}) => {
                 </ContenedorBoton>
 
             </Formulario>
-        </ContenedorDiv>  
+          
         <Alerta 
             tipo= {alerta.tipo}
             mensaje= {alerta.mensaje}
