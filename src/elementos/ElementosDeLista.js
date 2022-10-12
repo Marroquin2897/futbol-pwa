@@ -8,7 +8,7 @@ const Lista = styled.ul`
     overflow-y: auto;
  
     li {
-        grid-template-columns: 1fr 1fr 1fr auto;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr auto;
     }
  
     @media (max-width: 50rem) { /*80px*/
@@ -23,8 +23,8 @@ const ElementoLista = styled.li`
     padding: 1.25rem 0; /* 20px */
     border-bottom: 2px solid #F2F2F2;
     display: grid;
-    gap: 2px; /* 5px */
-    justify-content: space-between;
+    gap: 1px; /* 5px */
+    justify-content: space-evenly;
  
     & > div {
         width: 100%;
@@ -138,10 +138,18 @@ const Boleta = styled.div`
         justify-content: start;
     }
 `;
- 
+const Semestre = styled.div`
+color: #FFFFFF;
+font-size: 1.25rem; /* 20px */
+font-weight: 700;
+justify-content: end;
+
+@media (max-width: 50rem) { /* 80px */
+    justify-content: start;
+}
+`;
 const Fecha = styled.div`
     border-radius: 0.31rem; /* 5px */
-    background: ${theme.azulClaro};
     text-align: center;
     color: #fff;
     padding: 0.62rem 3.12rem; /* 10px 50px */
@@ -216,6 +224,7 @@ const BotonCargarMas = styled.button`
     border: none;
     border-radius: 7px;
     color: #fff;
+    text-align: center;
     font-family: 'Work Sans', sans-serif;
     padding: 1rem 1.87rem; /* 20px 30px */
 
@@ -244,6 +253,7 @@ export {
     Nss,
     Curp,
     Boleta,
+    Semestre,
     Fecha,
     ContenedorBotones,
     BotonAccion,

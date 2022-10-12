@@ -1,7 +1,7 @@
 import {db} from './firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
 
-const agregarJugador = ({nombre,apellidos,fechanac,nss,curp,boleta,semestre,escuela,uidUsuario}) => {
+const agregarJugador = ({nombre,apellidos,fechanac,nss,curp,boleta,semestre,uidUsuario}) => {
     return addDoc(collection(db,'jugadores'),{
         nombre: nombre,
         apellidos: apellidos,
@@ -10,7 +10,7 @@ const agregarJugador = ({nombre,apellidos,fechanac,nss,curp,boleta,semestre,escu
         curp: curp,
         boleta: boleta,
         semestre: semestre,
-        escuela: escuela,
+        
         uidUsuario: uidUsuario
     });
 }

@@ -3,11 +3,12 @@ import { Helmet } from 'react-helmet';
 import {Titulo} from '../elementos/Header';
 import {ReactComponent as IconoEditar} from './../imagenes/editar.svg';
 import {ReactComponent as IconoBorrar} from './../imagenes/borrar.svg';
-import {ReactComponent as IconoPersona} from './../imagenes/persona.svg';
 import useObtenerJugadores from './../hooks/useObtenerJugadores';
 import { Link } from 'react-router-dom';
 import Boton from './../elementos/Boton';
 import borrarJugador from './../firebase/borrarJugador';
+import {ReactComponent as IconoRegresar} from './../imagenes/regresar.svg';
+
 import {
     Lista,
     ElementoLista,
@@ -17,6 +18,7 @@ import {
     Nss,
     Curp,
     Boleta,
+    Semestre,
     ContenedorBotones,
     BotonAccion,
     BotonCargarMas,
@@ -40,14 +42,16 @@ const ListaJugadores = () => {
         <Lista>
             {jugadores.map((jugador) => {
                 return(
-                    <ElementoLista key={jugador.id}>
-                        <Nombre>
-                            <IconoPersona/>
+                    <ElementoLista key={jugador.id}> 
+                        <Nombre> 
                             {jugador.nombre} 
                         </Nombre>
                         <Apellidos>
                             {jugador.apellidos}
                         </Apellidos>
+                        <Fecha>
+                            {jugador.fechanac}
+                        </Fecha>
                         <Nss>
                             {jugador.nss}
                         </Nss>
@@ -57,6 +61,9 @@ const ListaJugadores = () => {
                         <Boleta>
                             {jugador.boleta}
                         </Boleta>
+                        <Semestre>
+                            {jugador.semestre}
+                        </Semestre>
 
                         <ContenedorBotones>
                             <BotonAccion as={Link} to={`/editar-jugador/${jugador.id}`}>
@@ -72,6 +79,7 @@ const ListaJugadores = () => {
             {hayMasPorCargar && 
                 <ContenedorBotonCentral>
                     <BotonCargarMas onClick={() => obtenerMasJugadores()}> Cargas más </BotonCargarMas>
+                    <Boton as={Link} to='/inicio'>  <IconoRegresar/></Boton>
                 </ContenedorBotonCentral>
             }
             
@@ -79,7 +87,7 @@ const ListaJugadores = () => {
             {jugadores.length === 0 &&
                 <ContenedorSubtitulo>
                     <Subtitulo> No hay jugadores por mostrar</Subtitulo>
-                    <Boton as={Link} to='/'>Agregar Jugador</Boton>
+                    <Boton as={Link} to='/registrar-jugador'>Agregar Jugador</Boton>
                 </ContenedorSubtitulo>
                 }
                 

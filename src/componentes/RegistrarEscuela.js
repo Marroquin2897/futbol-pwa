@@ -1,15 +1,13 @@
 import React, {useState} from 'react';
 import { Helmet } from 'react-helmet';
 import {Titulo} from '../elementos/Header';
-import { faSchool } from '@fortawesome/free-solid-svg-icons';
-import { IconoInicio } from './../elementos/ElementosFormularios';
 import ContenedorDiv from './../elementos/ContenedorDiv';
 import {ContenedorBoton, Formulario, Input } from './../elementos/ElementosFormularios';
 import Boton from './../elementos/Boton';
 import Select from 'react-select';
 import {db} from './../firebase/firebaseConfig';
 import {collection, addDoc} from 'firebase/firestore';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {useAuth} from './../contextos/AuthContext';
 
 const modalidades= [
@@ -104,7 +102,7 @@ let[clave, cambiarClave] = useState('');
         <Helmet>
             <title>Registrar Escuela</title>
         </Helmet>
-        <IconoInicio icon={faSchool}/>
+        
         <Titulo> Registrar Escuela </Titulo> 
         <ContenedorDiv>
             <Formulario action="" onSubmit={onSubmit} >
@@ -128,7 +126,8 @@ let[clave, cambiarClave] = useState('');
         
                 <ContenedorBoton>
                     <Boton as="button" type="submit"> Registrar </Boton>
-                    <Boton as="button" to="/inicio">Regresar</Boton>  
+                    <Boton as={Link} to="/inicio">Regresar</Boton>  
+                    <Boton as={Link} to="/registrar-jugador"> </Boton>
                 </ContenedorBoton>
             </Formulario>
         </ContenedorDiv>

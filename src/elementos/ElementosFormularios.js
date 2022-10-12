@@ -59,8 +59,8 @@ const IconoInicio = styled(FontAwesomeIcon)`
  
 const Formulario = styled.form`
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    grid-template-columns: 1fr 1fr ;
+    gap: 40px;
     @media (max-width: 800px){
             grid-template-columns: 1fr;
         }
@@ -145,6 +145,40 @@ const Boton = styled.button`
     &:hover{
         box-shadow: 3px 0px 30px rgba(163,163,163,1);
     }
+
+    svg {
+        width: 60px /* 18px */
+    }
+`;
+const BotonIcono = styled.button`
+    outline: none;
+    background: #560000;
+    border: none;
+    width: 2.5rem; /* 40px */
+    display: inline-block;
+    height: 2.5rem; /* 40px */
+    line-height: 2.5rem; /* 40px */
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 0.31rem; /* 5px */
+    margin-left: 0.625rem; /* 10px */
+    transition: .3s ease all;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+
+    &:hover{
+        box-shadow: 3px 0px 30px rgba(163,163,163,1);
+    }
+
+    svg {
+        width: 1.125rem; /* 18px */
+    }
+
+    @media (max-width: 50rem) { /* 80px */
+        opacity: 1;
+    }
 `;
 
 const MensajeExito = styled.p`
@@ -193,5 +227,6 @@ export {
         Boton,
         MensajeExito,
         MensajeError,
-        IconoValidacion
+        IconoValidacion,
+        BotonIcono
     };
