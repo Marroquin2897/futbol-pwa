@@ -9,7 +9,7 @@ import RegistroUsuario from './componentes/RegistroUsuario';
 import RegistrarEscuela from './componentes/RegistrarEscuela';
 import RegistrarJugador from './componentes/RegistrarJugador';
 import ListaJugadores from './componentes/ListaJugadores';
-
+import RolJuegos from './componentes/RolJuegos';
 import EditarJugador from './componentes/EditarJugador';
 import {Helmet} from 'react-helmet';
 import favicon from './imagenes/icono2-burrito.png';
@@ -19,6 +19,7 @@ import RutaPrivada from './componentes/RutaPrivada'
 import ForgotPassword from './componentes/ForgotPassword';
 import Home from './componentes/Home';
 import './App.css';
+import RolJuegos from './componentes/RolJuegos';
 
 WebFont.load({
   google: { //Tipo de letra para la pwa
@@ -65,6 +66,11 @@ const Index = () => {
             <Route path="/editar-jugador/:id" element={
               <RutaPrivada>
                 <EditarJugador/>
+              </RutaPrivada>
+            }/>
+            <Route path="/rol-juegos" element={
+              <RutaPrivada>
+                <RolJuegos/>
               </RutaPrivada>
             }/>
           </Routes>
