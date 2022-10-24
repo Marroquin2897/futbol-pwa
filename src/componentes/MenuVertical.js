@@ -1,55 +1,24 @@
 import React from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-import { MdAccountCircle, MdOutlineControlPoint, MdOutlineLocalPostOffice, MdVisibility,MdOutlineBrightness7,MdOutlineCancel } from "react-icons/md";
+import { slide as Menu } from 'react-burger-menu'
+import '../menuSide.css';
+import { Link } from 'react-router-dom';
+import {FaPlusCircle,FaUserPlus,FaListAlt,FaRegCalendarAlt,FaExpeditedssl} from "react-icons/fa";
 
-const fontStyles = {color: '#560000', fontSize: '80px'};
+const fontStyles = {color: '#560000', fontSize: '60px'};
+
 class MenuVert extends React.Component  {
-  constructor(props) {
-    super(props);
-
-    this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.state = {
-      collapsed: true
-    };
-  }
-
-  toggleNavbar() {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
-  }
-  render() {
-    return (
-      <div>
-        <Navbar color="faded" light>
-         <NavbarToggler onClick={this.toggleNavbar} className="mr-2" style={{fontSize: "40px"}}/> 
-         <NavbarBrand href="/" className="mr-2">Menu</NavbarBrand>         
-          <Collapse isOpen={!this.state.collapsed} navbar>
-            <Nav navbar>
-              <NavItem>
-                <NavLink href="/components/"><MdAccountCircle style={fontStyles} />Mi Perfil</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/registrar-escuela"><MdOutlineControlPoint style={fontStyles}/>Registrar Escuela</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href=""><MdVisibility style={fontStyles} />Ver Posiciones</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href=""><MdOutlineLocalPostOffice style={fontStyles}/>Notificaciones</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href=""><MdOutlineBrightness7 style={fontStyles}/>Configuracion</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href=""><MdOutlineCancel style={fontStyles}/>Cerrar Sesion</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
-       
-      </div>
-    );
-  }
+    
+    render () {
+      return (
+        <Menu >
+          <Link id="registrarEscuela" className="menu-item" to="/registrar-escuela" > <FaPlusCircle  style={fontStyles} />Registrar Escuela</Link>
+          <Link id="registrarJugador" className="menu-item" to="/registrar-jugador"> <FaUserPlus  style={fontStyles}/>Registrar Jugador</Link>
+          <Link id="listaJugadores" className="menu-item" to="/lista-jugadores"><FaListAlt  style={fontStyles} /> Lista de Jugadores</Link>
+          <Link id="rolJuegos" className="menu-item" to= "/rol-juegos"><FaRegCalendarAlt  style={fontStyles}/> Juegos</Link>
+          <Link id="cerrarSesion" className="menu-item" to= "/iniciar-sesion"><FaExpeditedssl  style={fontStyles}/> Cerrar Sesion</Link>
+        </Menu>
+      );
+    }
 }
-export default MenuVert
+export default MenuVert;
+

@@ -19,7 +19,7 @@ import RutaPrivada from './componentes/RutaPrivada'
 import ForgotPassword from './componentes/ForgotPassword';
 import Home from './componentes/Home';
 import './App.css';
-import RolJuegos from './componentes/RolJuegos';
+//import RolJuegos from './componentes/RolJuegos';
 
 WebFont.load({
   google: { //Tipo de letra para la pwa
