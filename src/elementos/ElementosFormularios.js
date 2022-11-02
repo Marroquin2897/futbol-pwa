@@ -61,6 +61,7 @@ const Formulario = styled.form`
     display: grid;
     grid-template-columns: 1fr 1fr ;
     gap: 40px;
+    text-align: center;
     @media (max-width: 800px){
             grid-template-columns: 1fr;
         }
