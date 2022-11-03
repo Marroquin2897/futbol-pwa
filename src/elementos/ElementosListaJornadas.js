@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 import theme from './../theme';
 
+const colores = {
+    borde: '#0075FF',
+    error: '#bb2929',
+    exito: '#1ed12d',
+}
 const Lista = styled.ul`
     list-style: none;
     padding: 0 2.5rem; /* 40px */
@@ -8,7 +13,7 @@ const Lista = styled.ul`
     overflow-y: auto;
  
     li {
-        grid-template-columns: 1fr   auto;
+        grid-template-columns: 1fr  1fr auto;
     }
  
     @media (max-width: 50rem) { /*80px*/
@@ -72,11 +77,57 @@ const Visitante = styled.div`
         font-size: 1.12rem;
     }
 `;
+const Tabla = styled.table`
+    caption-side: bottom;
+    table-layout: auto; 
+    width: 100%;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+`;
+const Celda = styled.th`
+    text-align= center;
+    
+    
+    
+`;
+
+const TR = styled.tr`
+    text-align= center;
+    color= #FFFFFF;
+`;
+const TD = styled.td`
+    text-align= center;
+    color= #FFFFFF;
+`;
+const Input = styled.input`
+    width: 100%;
+    background: #fff;
+    border-radius: 3px;
+    height: 45px;
+    line-height: 45px;
+    padding 0 40px 0 10px;
+    transition: .3s ease all;
+    border: 3px solid transparent;
+
+    &:focus{
+        border: 3px solid ${colores.borde};
+        outline: none;
+        box-shadow: 3px 0px 30px rgba(163,163,163,0.4);
+    }
+
+    
+`;
 
 
 export {
     Lista,
     ElementoLista,
     Local,
-    Visitante
+    Visitante,
+    Tabla,
+    Celda,
+    TR,
+    TD,
+    Input
 };

@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import {Titulo} from '../elementos/Header';
-
-import {
-    Lista,
-    ElementoLista,
-    Local,
-    Visitante,
-    
-} from './../elementos/ElementosListaJornadas';
+import '../ElementosJornadas.css';
 import useObtenerJornadas from '../hooks/useObtenerJornadas';
 import useObtenerVisitantesSeisEquipos from '../hooks/useObtenerVisitantesSeisEquipos';
 
@@ -27,30 +20,22 @@ const RolJuegos = () => {
             </Helmet>
             <Titulo> Juegos Programados </Titulo> 
             
-            <Lista>
-            {jornadaslocales.map((jornada) => {
-                return(
-                    <ElementoLista key={jornada.id}> 
-                        <Local>
-                            {jornada.Local}
-                        </Local>
-                    </ElementoLista>
-                );
-            })}
-            
-            
-            </Lista> 
-            <Lista>
-            {jornadasvisitantes.map((jornada) => {
-                return(
-                    <ElementoLista key={jornada.id}> 
-                        <Visitante>
-                            {jornada.Visitante}
-                        </Visitante>
-                    </ElementoLista>
-                );
-            })}
-            </Lista> 
+            <table className='tabla'>
+                <tr>
+                    <th colSpan={4}> J O R N A D A 1</th>
+                    
+                </tr>
+                <tr>
+                    <th>Local</th>
+                    <th>Llave</th>
+                    <th>Llave</th>
+                    <th>Visitante</th>
+                </tr>
+                
+                
+                
+               
+            </table>
             
             </>
      );
