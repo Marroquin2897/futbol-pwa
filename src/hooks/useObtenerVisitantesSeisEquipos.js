@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {db} from './../firebase/firebaseConfig';
-import { collection,query,where,startAfter,onSnapshot } from 'firebase/firestore';
+import { collection,query,where,startAfter,onSnapshot,orderBy } from 'firebase/firestore';
 
 const useObtenerVisitantesSeisEquipos = () => {
     const[jornadasvisitantes,cambiarJornadasVisitantes] = useState([]);

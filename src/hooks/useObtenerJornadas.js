@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {db} from './../firebase/firebaseConfig';
-import { collection,query,where,startAfter,onSnapshot } from 'firebase/firestore';
+import { collection,query,where,startAfter,onSnapshot,orderBy } from 'firebase/firestore';
 
 const useObtenerJornadas = () => {
     const[jornadaslocales,cambiarJornadasLocales] = useState([]);
@@ -30,6 +30,7 @@ const useObtenerJornadas = () => {
         const consulta = query(
             collection(db,'LocalesSeisEquipos'),
             where('Local','in',["1","2","3"]),
+            
             
             
         );
