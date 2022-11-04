@@ -6,6 +6,8 @@ import useObtenerJornadas from '../hooks/useObtenerJornadas';
 import useObtenerLocalesJ2SeisEquipos from '../hooks/useObtenerLocalesJ2SeisEquipos';
 import useObtenerVisitantesJ2SeisEquipos from '../hooks/useObtenerVisitantesJ2SeisEquipos';
 import useObtenerVisitantesSeisEquipos from '../hooks/useObtenerVisitantesSeisEquipos';
+import useObtenerLocalesJ3SeisEquipos from '../hooks/useObtenerLocalesJ3SeisEquipos';
+import useObtenerVisitantesJ3SeisEquipos from '../hooks/useObtenerVisitantesJ3SeisEquipos';
 import { Formulario, Input,InputLlave,ElementoLista,LlaveLocal,LlaveVisitante,Lista } from './../elementos/ElementosListaJornadas';
 const RolJuegos = () => {
     const [jornadaslocales,obtenerMasJornadas,hayMasPorCargar] = useObtenerJornadas();
@@ -13,7 +15,7 @@ const RolJuegos = () => {
     const [jornadaslocalesJ2,obtenerMasLocalesJ2,hayMasPorCargarLocalJ2] = useObtenerLocalesJ2SeisEquipos();
     const [jornadasvisitantesJ2,obtenerMasVisitantesJ2,hayMasPorCargarVisiJ2] = useObtenerVisitantesJ2SeisEquipos();
     const [jornadaslocalesJ3,obtenerMasLocalesJ3,hayMasPorCargarLocalJ3] = useObtenerLocalesJ3SeisEquipos();
-    const [jornadasvisitantesJ3,obtenerMasVisitantesJ3,hayMasPorCargarVisiJ3] = useObtenerVisitantesJ3SeisEquipos();
+    //const [jornadasvisitantesJ3,obtenerMasVisitantesJ3,hayMasPorCargarVisiJ3] = useObtenerVisitantesJ4SeisEquipos();
     const[nombreEquipo, establecerNombreEquipo] = useState('');
      
     
@@ -61,80 +63,7 @@ const RolJuegos = () => {
                })}
                </Lista>            
             </Formulario>
-            <table className='tabla'>
-               <tr className='tr'>
-                    <th className='th' colSpan={4}> J O R N A D A 2</th> 
-                </tr>
-            </table>
-            <Formulario>
-            <Lista>
-               {jornadaslocalesJ2.map((jornada)=>{
-                  return(
-                     
-                     <ElementoLista key={jornada.id}> 
-                        <Input type='text'
-                           name='nombre'
-                           placeholder='Nombre-Equipo'
-                           value={nombreEquipo}
-                            />
-                        <LlaveLocal> {jornada.Local} </LlaveLocal>
-                     </ElementoLista>
-                  );
-               })}
-               </Lista>
-               <Lista>
-               {jornadasvisitantesJ2.map((jornada)=>{
-                  return(
-                     <ElementoLista key={jornada.id}>
-                        <LlaveVisitante> {jornada.Visitante} </LlaveVisitante>
-                        <Input type='text'
-                           name='nombre'
-                           placeholder='Nombre-Equipo'
-                           value={nombreEquipo}
-                            />
-                     </ElementoLista>
-                  );
-               })}
-               </Lista>
-            </Formulario>
-            <Formulario>
-            <Lista>
-               {jornadaslocalesJ3.map((jornada)=>{
-                  return(
-                     
-                     <ElementoLista key={jornada.id}> 
-                        <Input type='text'
-                           name='nombre'
-                           placeholder='Nombre-Equipo'
-                           value={nombreEquipo}
-                            />
-                        <LlaveLocal> {jornada.Local} </LlaveLocal>
-                     </ElementoLista>
-                  );
-               })}
-               </Lista>
-               <Lista>
-               {jornadasvisitantesJ2.map((jornada)=>{
-                  return(
-                     <ElementoLista key={jornada.id}>
-                        <LlaveVisitante> {jornada.Visitante} </LlaveVisitante>
-                        <Input type='text'
-                           name='nombre'
-                           placeholder='Nombre-Equipo'
-                           value={nombreEquipo}
-                            />
-                     </ElementoLista>
-                  );
-               })}
-               </Lista>
-            </Formulario>
 
-
-            
-                
-            
-            
-            
             </>
      );
 }

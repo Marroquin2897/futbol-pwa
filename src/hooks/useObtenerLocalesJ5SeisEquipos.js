@@ -2,27 +2,27 @@ import {useEffect, useState} from 'react';
 import {db} from './../firebase/firebaseConfig';
 import { collection,query,where,startAfter,onSnapshot,orderBy } from 'firebase/firestore';
 
-const useObtenerLocalesJ3SeisEquipos = () => {
-    const[j3locales,cambiarLocalesJ3] = useState([]);
-    const[ultimoLocalJ3,cambiarUltimoLocalJ3] = useState(null)
-    const[hayMasPorCargarLocalJ3,cambiarHayMasPorCargarLocalJ3] = useState(false);
+const useObtenerLocalesJ5SeisEquipos = () => {
+    const[j5locales,cambiarLocalesJ5] = useState([]);
+    const[ultimoLocalJ5,cambiarUltimoLocalJ5] = useState(null)
+    const[hayMasPorCargarLocalJ5,cambiarHayMasPorCargarLocalJ5] = useState(false);
 
-    const obtenerMasLocalesJ3 = () => { //Mostrar el resto de equipos locales
+    const obtenerMasLocalesJ5 = () => { //Mostrar el resto de equipos locales
         const consulta = query (
             collection(db,'LocalesSeisEquipos'),
             where('Local','in',["6","5","1"]),
             
-            startAfter(ultimoLocalJ3)
+            startAfter(ultimoLocalJ5)
         );
         onSnapshot(consulta,(snapshot) => {
             if(snapshot.docs.length > 0){
-                cambiarUltimoLocalJ3(snapshot.docs[snapshot.docs.length -1]);
+                cambiarUltimoLocalJ5(snapshot.docs[snapshot.docs.length -1]);
 
-                cambiarLocalesJ3(j3locales.concat(snapshot.docs.map((jornada) => {
+                cambiarLocalesJ5(j5locales.concat(snapshot.docs.map((jornada) => {
                     return{...jornada.data(), id: jornada.id}
                 })))
             } else{
-                cambiarHayMasPorCargarLocalJ3(false);
+                cambiarHayMasPorCargarLocalJ5(false);
             }
         },error => {console.log(error)});
     }
@@ -35,18 +35,18 @@ const useObtenerLocalesJ3SeisEquipos = () => {
         );
         const unsuscribe = onSnapshot(consulta,(snapshot) => {
             if(snapshot.docs.length > 0){
-                cambiarUltimoLocalJ3(snapshot.docs[snapshot.docs.length-1]);
-                cambiarHayMasPorCargarLocalJ3(true);
+                cambiarUltimoLocalJ5(snapshot.docs[snapshot.docs.length-1]);
+                cambiarHayMasPorCargarLocalJ5(true);
             } else{
-                cambiarHayMasPorCargarLocalJ3(false);
+                cambiarHayMasPorCargarLocalJ5(false);
             }
-            cambiarLocalesJ3(snapshot.docs.map((jornada) => {
+            cambiarLocalesJ5(snapshot.docs.map((jornada) => {
                 return{...jornada.data(), id: jornada.id}
             }));
         });
         return unsuscribe;
-    },[j3locales]);
-    return [j3locales,obtenerMasLocalesJ3,hayMasPorCargarLocalJ3];
+    },[j5locales]);
+    return [j5locales,obtenerMasLocalesJ5,hayMasPorCargarLocalJ5];
 }
  
-export default useObtenerLocalesJ3SeisEquipos;
+export default useObtenerLocalesJ5SeisEquipos;
