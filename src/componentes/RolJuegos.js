@@ -12,6 +12,8 @@ const RolJuegos = () => {
     const [jornadasvisitantes,obtenerMasVisitantes,hayMasPorCargarVisi] = useObtenerVisitantesSeisEquipos();
     const [jornadaslocalesJ2,obtenerMasLocalesJ2,hayMasPorCargarLocalJ2] = useObtenerLocalesJ2SeisEquipos();
     const [jornadasvisitantesJ2,obtenerMasVisitantesJ2,hayMasPorCargarVisiJ2] = useObtenerVisitantesJ2SeisEquipos();
+    const [jornadaslocalesJ3,obtenerMasLocalesJ3,hayMasPorCargarLocalJ3] = useObtenerLocalesJ3SeisEquipos();
+    const [jornadasvisitantesJ3,obtenerMasVisitantesJ3,hayMasPorCargarVisiJ3] = useObtenerVisitantesJ3SeisEquipos();
     const[nombreEquipo, establecerNombreEquipo] = useState('');
      
     
@@ -67,6 +69,37 @@ const RolJuegos = () => {
             <Formulario>
             <Lista>
                {jornadaslocalesJ2.map((jornada)=>{
+                  return(
+                     
+                     <ElementoLista key={jornada.id}> 
+                        <Input type='text'
+                           name='nombre'
+                           placeholder='Nombre-Equipo'
+                           value={nombreEquipo}
+                            />
+                        <LlaveLocal> {jornada.Local} </LlaveLocal>
+                     </ElementoLista>
+                  );
+               })}
+               </Lista>
+               <Lista>
+               {jornadasvisitantesJ2.map((jornada)=>{
+                  return(
+                     <ElementoLista key={jornada.id}>
+                        <LlaveVisitante> {jornada.Visitante} </LlaveVisitante>
+                        <Input type='text'
+                           name='nombre'
+                           placeholder='Nombre-Equipo'
+                           value={nombreEquipo}
+                            />
+                     </ElementoLista>
+                  );
+               })}
+               </Lista>
+            </Formulario>
+            <Formulario>
+            <Lista>
+               {jornadaslocalesJ3.map((jornada)=>{
                   return(
                      
                      <ElementoLista key={jornada.id}> 

@@ -4,7 +4,7 @@ import { collection,query,where,startAfter,onSnapshot,orderBy } from 'firebase/f
 
 const useObtenerLocalesJ2SeisEquipos = () => {
     const[j2locales,cambiarLocalesJ2] = useState([]);
-    const[ultimoLocal2,cambiarUltimoLocalJ2] = useState(null)
+    const[ultimoLocalJ2,cambiarUltimoLocalJ2] = useState(null)
     const[hayMasPorCargarLocalJ2,cambiarHayMasPorCargarLocalJ2] = useState(false);
 
     const obtenerMasLocalesJ2 = () => { //Mostrar el resto de equipos locales
@@ -12,7 +12,7 @@ const useObtenerLocalesJ2SeisEquipos = () => {
             collection(db,'LocalesSeisEquipos'),
             where('Local','in',["6","5","1"]),
             
-            startAfter(ultimoLocal2)
+            startAfter(ultimoLocalJ2)
         );
         onSnapshot(consulta,(snapshot) => {
             if(snapshot.docs.length > 0){
