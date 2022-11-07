@@ -66,10 +66,19 @@ const Formulario = styled.form`
             grid-template-columns: 1fr;
         }
 `;
+const FormularioDos = styled.form`
+    display: grid;
+    grid-template-columns: 1fr ;
+    gap: 40px;
+    text-align: center;
+    @media (max-width: 800px){
+            grid-template-columns: 1fr;
+        }
+`;
 const Label = styled.label`
     color: #FFFFFF;
     display: block;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     font-weight: 700;
     padding: 10px;
     min-height: 40px;
@@ -79,6 +88,17 @@ const Label = styled.label`
         color: ${colores.error};    
     `}
 `;
+const LabelMensaje = styled.label`
+    color: #FFFFFF;
+    display: block;
+    grid-template-columns: 1fr;
+    font-weight: 700;
+    padding: 10px;
+    min-height: 40px;
+    cursor: pointer;
+
+`;
+
 
 const GrupoInput = styled.div`
     position: relative;
@@ -93,7 +113,33 @@ const Input = styled.input`
     padding 0 40px 0 10px;
     transition: .3s ease all;
     border: 3px solid transparent;
+    
+    &:focus{
+        border: 3px solid ${colores.borde};
+        outline: none;
+        box-shadow: 3px 0px 30px rgba(163,163,163,0.4);
+    }
 
+    ${props => props.valido === 'true' && css`
+        border: 3px solid transparent;
+        `}
+    ${props => props.valido === 'false' && css`
+        border: 3px solid ${colores.error} !important;
+        `}
+`;
+const InputDos = styled.input`
+    width: 30%;
+    background: #fff;
+    border-radius: 3px;
+    height: 45px;
+    line-height: 45px;
+    padding 0 40px 0 10px;
+    transition: .3s ease all;
+    border: 3px solid transparent;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
     &:focus{
         border: 3px solid ${colores.borde};
         outline: none;
@@ -229,5 +275,8 @@ export {
         MensajeExito,
         MensajeError,
         IconoValidacion,
-        BotonIcono
+        BotonIcono,
+        LabelMensaje,
+        FormularioDos,
+        InputDos
     };

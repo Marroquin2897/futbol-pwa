@@ -11,6 +11,7 @@ import RegistrarJugador from './componentes/RegistrarJugador';
 import ListaJugadores from './componentes/ListaJugadores';
 import RolJuegos from './componentes/RolJuegos';
 import EditarJugador from './componentes/EditarJugador';
+import NumEquipos from './componentes/NumeroEquipos';
 import {Helmet} from 'react-helmet';
 import favicon from './imagenes/icono2-burrito.png';
 import InterfazInicio from './componentes/InterfazInicio';
@@ -68,6 +69,11 @@ const Index = () => {
             <Route path="/editar-jugador/:id" element={
               <RutaPrivada>
                 <EditarJugador/>
+              </RutaPrivada>
+            }/>
+            <Route path="/generar-rol" element={
+              <RutaPrivada>
+                <NumEquipos/>
               </RutaPrivada>
             }/>
             <Route path="/rol-juegos" element={

@@ -14,7 +14,7 @@ class MenuVert extends React.Component  {
           <Link id="registrarEscuela" className="menu-item" to="/registrar-escuela" > <FaPlusCircle  style={fontStyles} />Registrar Escuela</Link>
           <Link id="registrarJugador" className="menu-item" to="/registrar-jugador"> <FaUserPlus  style={fontStyles}/>Registrar Jugador</Link>
           <Link id="listaJugadores" className="menu-item" to="/lista-jugadores"><FaListAlt  style={fontStyles} /> Lista de Jugadores</Link>
-          <Link id="rolJuegos" className="menu-item" to= "/rol-juegos"><FaRegCalendarAlt  style={fontStyles}/> Juegos</Link>
+          <Link id="generarol" className="menu-item" to= "/generar-rol"><FaRegCalendarAlt  style={fontStyles}/> Generar Rol </Link>
           <Link id="cerrarSesion" className="menu-item" to= "/iniciar-sesion"><FaExpeditedssl  style={fontStyles}/> Cerrar Sesion</Link>
         </Menu>
       );

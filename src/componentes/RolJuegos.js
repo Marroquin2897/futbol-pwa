@@ -3,23 +3,62 @@ import { Helmet } from 'react-helmet';
 import {Titulo} from '../elementos/Header';
 import '../ElementosJornadas.css';
 import useObtenerJornadas from '../hooks/useObtenerJornadas';
-import useObtenerLocalesJ2SeisEquipos from '../hooks/useObtenerLocalesJ2SeisEquipos';
-import useObtenerVisitantesJ2SeisEquipos from '../hooks/useObtenerVisitantesJ2SeisEquipos';
 import useObtenerVisitantesSeisEquipos from '../hooks/useObtenerVisitantesSeisEquipos';
-import useObtenerLocalesJ3SeisEquipos from '../hooks/useObtenerLocalesJ3SeisEquipos';
-import useObtenerVisitantesJ3SeisEquipos from '../hooks/useObtenerVisitantesJ3SeisEquipos';
-import { Formulario, Input,InputLlave,ElementoLista,LlaveLocal,LlaveVisitante,Lista } from './../elementos/ElementosListaJornadas';
+import { Formulario, Input,ElementoLista,LlaveLocal,LlaveVisitante,Lista } from './../elementos/ElementosListaJornadas';
+import { BotonCentrado } from '../elementos/ElementosFormularios';
+import Boton from './../elementos/Boton';
+import Alerta from './../elementos/Alerta';
+
 const RolJuegos = () => {
+
     const [jornadaslocales,obtenerMasJornadas,hayMasPorCargar] = useObtenerJornadas();
     const [jornadasvisitantes,obtenerMasVisitantes,hayMasPorCargarVisi] = useObtenerVisitantesSeisEquipos();
-    const [jornadaslocalesJ2,obtenerMasLocalesJ2,hayMasPorCargarLocalJ2] = useObtenerLocalesJ2SeisEquipos();
-    const [jornadasvisitantesJ2,obtenerMasVisitantesJ2,hayMasPorCargarVisiJ2] = useObtenerVisitantesJ2SeisEquipos();
-    const [jornadaslocalesJ3,obtenerMasLocalesJ3,hayMasPorCargarLocalJ3] = useObtenerLocalesJ3SeisEquipos();
-    //const [jornadasvisitantesJ3,obtenerMasVisitantesJ3,hayMasPorCargarVisiJ3] = useObtenerVisitantesJ4SeisEquipos();
-    const[nombreEquipo, establecerNombreEquipo] = useState('');
+    const[nombreEquipo1, establecerNombreEquipo1] = useState('');
+    const[nombreEquipo2, establecerNombreEquipo2] = useState('');
+    const[nombreEquipo3, establecerNombreEquipo3] = useState('');
+    const[nombreEquipo4, establecerNombreEquipo4] = useState('');
+    const[nombreEquipo5, establecerNombreEquipo5] = useState('');
+    const[nombreEquipo6, establecerNombreEquipo6] = useState('');
      
-    
+   const handleChange = (e) => {
+      switch(e.target.name){
+         case 'equipo1':
+            establecerNombreEquipo1(e.target.value);
+            break;
+         case 'equipo2':
+            establecerNombreEquipo2(e.target.value);
+            break;
+         case 'equipo3':
+            establecerNombreEquipo3(e.target.value);
+            break;
+         case 'equipo4':
+            establecerNombreEquipo4(e.target.value);
+            break;
+         case 'equipo5':
+            establecerNombreEquipo5(e.target.value);
+            break;
+         case 'equipo1':
+            establecerNombreEquipo6(e.target.value);
+            break;
+         default:
+            break;
+   }
+}
+   const handleSubmit = (e) => {
+      e.preventDefault();
+      cambiarEdoAlerta(false);
+      cambiarAlerta({});
 
+      if(nombreEquipo1 === '' || nombreEquipo2 === '' || nombreEquipo3 === '' || nombreEquipo4 === '' || nombreEquipo5 === '' || nombreEquipo6 === ''){
+         cambiarEdoAlerta(true);
+            cambiarAlerta({
+                tipo: 'error',
+                mensaje:'Completa todos los campos'
+            });
+            return;
+      }
+
+   }
    
     return ( 
             <>
@@ -61,8 +100,17 @@ const RolJuegos = () => {
                      </ElementoLista>
                   );
                })}
-               </Lista>            
+               </Lista> 
+               <BotonCentrado>
+                  <Boton as="button" type="submit"> Guardar Datos</Boton>
+               </BotonCentrado>           
             </Formulario>
+            <Alerta 
+            tipo= {alerta.tipo}
+            mensaje= {alerta.mensaje}
+            estadoAlerta={estadoAlerta}
+            cambiarEdoAlerta={cambiarEdoAlerta}/>
+            
 
             </>
      );
