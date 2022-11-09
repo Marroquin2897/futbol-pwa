@@ -10,8 +10,13 @@ import Alerta from './../elementos/Alerta';
 import {db} from './../firebase/firebaseConfig';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { addDoc, collection } from 'firebase/firestore';
-
-
+import Select from 'react-select';
+const roles= [
+    {label: 'Administrador', value:'1'},
+    {label: 'Jugador', value:'2'},
+    {label: 'Profesor/Entrenador', value:'3'},
+    {label: 'Invitado', value:'4'},
+]
 const RegistroUsuarios = () => {
     const navigate = useNavigate();
     const[nombre, establecerNombre] = useState('');
@@ -23,8 +28,14 @@ const RegistroUsuarios = () => {
     const[email, establecerEmail] = useState('');
     const[password, establecerPassword] = useState('');
     const[password2, establecerPassword2] = useState('');
+    const[rol,cambiarRol] = useState('');
     const[estadoAlerta,cambiarEdoAlerta] = useState(false);
     const[alerta,cambiarAlerta] = useState({});
+
+
+    const onDropdownChangeRol = (value) => {
+        cambiarRol(value);
+    }
 
     const handleChange = (e) => {
         
@@ -56,6 +67,9 @@ const RegistroUsuarios = () => {
             case 'password2':
                 establecerPassword2(e.target.value);
                 break;
+            case 'rol':
+                cambiarRol(e.target.value);
+                break;    
             default:
                 break;
         }
@@ -113,7 +127,8 @@ const RegistroUsuarios = () => {
             return;
         }
         //Validar que ningun campo quede vacio 
-        if(nombre === '' || apellidos === '' || fechaNac === '' || telefono === '' || direccion === '' || boletaempleado === '' || email ==='' || password === '' || password2 ===''){ 
+        if(nombre === '' || apellidos === '' || fechaNac === '' || telefono === '' || direccion === '' || boletaempleado === '' || email ==='' || password === '' || password2 ==='' 
+        || rol ===''){ 
             cambiarEdoAlerta(true);
             cambiarAlerta({
                 tipo: 'error',
@@ -146,7 +161,8 @@ const RegistroUsuarios = () => {
                 telefono: telefono,
                 direccion: direccion,
                 boleta: boletaempleado,
-                correo: email   
+                correo: email,
+                rol: rol   
             });
            
             navigate('/iniciar-sesion');
@@ -202,6 +218,7 @@ const RegistroUsuarios = () => {
             <Input
                 type='date'
                 name='fechaNac'
+                placeholder='Fecha de Nacimiento'
                 value={fechaNac}
                 onChange={handleChange}
             />
@@ -247,9 +264,15 @@ const RegistroUsuarios = () => {
                 placeholder='Confirmar contraseña'
                 value={password2}
                 onChange={handleChange}
-            />       
+            />  
+            <Select
+                    placeholder='Elige rol'
+                    isMulti options = {roles}
+                    onChange= {onDropdownChangeRol}
+                />      
             <BotonCentrado>
                 <Boton as="button" type="submit"> Crear Cuenta </Boton> 
+                <p> </p>
                 <p></p>
                 <Boton  to='/iniciar-sesion'> Iniciar Sesión </Boton>     
             </BotonCentrado>
