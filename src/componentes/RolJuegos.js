@@ -8,6 +8,7 @@ import { Formulario, Input,ElementoLista,LlaveLocal,LlaveVisitante,Lista } from 
 import { BotonCentrado } from '../elementos/ElementosFormularios';
 import Boton from './../elementos/Boton';
 import Alerta from './../elementos/Alerta';
+import { addDoc, collection } from 'firebase/firestore';
 
 const RolJuegos = () => {
 
@@ -19,7 +20,8 @@ const RolJuegos = () => {
     const[nombreEquipo4, establecerNombreEquipo4] = useState('');
     const[nombreEquipo5, establecerNombreEquipo5] = useState('');
     const[nombreEquipo6, establecerNombreEquipo6] = useState('');
-     
+    const[estadoAlerta,cambiarEdoAlerta] = useState(false);
+    const[alerta,cambiarAlerta] = useState({});
    const handleChange = (e) => {
       switch(e.target.name){
          case 'equipo1':
@@ -57,6 +59,7 @@ const RolJuegos = () => {
             });
             return;
       }
+      
 
    }
    
@@ -80,7 +83,7 @@ const RolJuegos = () => {
                         <Input type='text'
                            name='nombre'
                            placeholder='Nombre-Equipo'
-                           value={nombreEquipo}
+                           value={nombreEquipo1}
                             />
                         <LlaveLocal> {jornada.Local} </LlaveLocal>
                      </ElementoLista>
@@ -95,7 +98,7 @@ const RolJuegos = () => {
                         <Input type='text'
                            name='nombre'
                            placeholder='Nombre-Equipo'
-                           value={nombreEquipo}
+                           value={nombreEquipo2}
                             />
                      </ElementoLista>
                   );
