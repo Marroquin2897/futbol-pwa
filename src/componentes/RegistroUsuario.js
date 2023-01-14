@@ -9,7 +9,7 @@ import {  createUserWithEmailAndPassword } from "firebase/auth";
 import Alerta from './../elementos/Alerta';
 import {db} from './../firebase/firebaseConfig';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection,getDoc,doc } from 'firebase/firestore';
 import Select from 'react-select';
 const roles= [
     {label: 'Administrador', value:'1'},
@@ -74,7 +74,7 @@ const RegistroUsuarios = () => {
                 break;
         }
     }
-
+    
     const handleSubmit = async (e) =>{ //Para obtener los datos de los inputs
         e.preventDefault();
         cambiarEdoAlerta(false);
