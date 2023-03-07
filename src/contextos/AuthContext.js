@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { auth } from './../firebase/firebaseConfig';
-import { onAuthStateChanged, sendPasswordResetEmail} from 'firebase/auth';
-
+import {getAuth, onAuthStateChanged, sendPasswordResetEmail} from 'firebase/auth';
+import firebaseApp from "../firebase/firebaseConfig";
 
 const AuthContext = React.createContext();
-  
+const auth = getAuth(firebaseApp);
+
 //Hookd para acceder al contexto
 const useAuth = () =>{
     return useContext(AuthContext);

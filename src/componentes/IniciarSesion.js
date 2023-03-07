@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import { Helmet } from 'react-helmet';
-import {  signInWithEmailAndPassword } from "firebase/auth";
-import {auth} from './../firebase/firebaseConfig';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 import Alerta from './../elementos/Alerta';
 import {useNavigate} from 'react-router-dom';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom'
+import firebaseApp from "../firebase/firebaseConfig";
+
+const auth = getAuth(firebaseApp);
 const IniciarSesion = () => {
     const navigate = useNavigate();
    

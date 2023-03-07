@@ -3,21 +3,30 @@ import { Helmet } from 'react-helmet';
 import {Titulo} from '../elementos/Header';
 import Boton from './../elementos/Boton';
 import {BotonCentrado, Formulario, Input,IconoInicio } from './../elementos/ElementosFormularios';
-import {auth} from './../firebase/firebaseConfig';
 import {useNavigate} from 'react-router-dom';
-import {  createUserWithEmailAndPassword } from "firebase/auth";
 import Alerta from './../elementos/Alerta';
-import {db} from './../firebase/firebaseConfig';
+
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
-import { addDoc, collection,getDoc,doc } from 'firebase/firestore';
+
 import Select from 'react-select';
+import firebaseApp from "../firebase/firebaseConfig";
+import {getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
+
+import {getFirestore,doc,setDoc} from "firebase/firestore"
+
+
+const auth = getAuth(firebaseApp);
 const roles= [
     {label: 'Administrador', value:'1'},
     {label: 'Jugador', value:'2'},
     {label: 'Profesor/Entrenador', value:'3'},
     {label: 'Invitado', value:'4'},
 ]
-const RegistroUsuarios = () => {
+
+const Login = () => {
+    const firestore = getFirestore(firebaseApp);
+    const [registrarse, setRegistrarse] = useState(false);
+    
     const navigate = useNavigate();
     const[nombre, establecerNombre] = useState('');
     const[apellidos, establecerApellidos] = useState('');
@@ -32,11 +41,36 @@ const RegistroUsuarios = () => {
     const[estadoAlerta,cambiarEdoAlerta] = useState(false);
     const[alerta,cambiarAlerta] = useState({});
 
-
     const onDropdownChangeRol = (value) => {
         cambiarRol(value);
     }
-
+    
+    async function registrarUsuario(email, password, rol){
+    
+        const infoUsuario = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password)
+            .then((usuarioFirebase) => {
+                return usuarioFirebase;
+            });
+            
+            //PASAMOS EL UID PARA GUARDARLO EN LA BD(FIRESTORE)
+            const docuRef = doc(firestore,`usuarios/${infoUsuario.user.uid}`);
+            setDoc(docuRef,{
+            nombre: nombre,
+            apellidos: apellidos,
+            fechaNacimiento: fechaNac,
+            telefono: telefono,
+            direccion: direccion,
+            boleta: boletaempleado,
+            correo: email,
+            rol: rol
+            }); 
+            
+            navigate('/iniciar-sesion');
+    }
+    
     const handleChange = (e) => {
         
         switch(e.target.name){
@@ -75,18 +109,17 @@ const RegistroUsuarios = () => {
         }
     }
     
-    const handleSubmit = async (e) =>{ //Para obtener los datos de los inputs
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        cambiarEdoAlerta(false);
-        cambiarAlerta({});
+        
         //validar el correo, nombre, direccion, telefono, boleta, apellidos
         const expresionRegularCorreo = /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/;
         const expresionRegularNombre = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
         const expresionRegularApellidos = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
         const expresionRegularTelefono = /^\d{7,14}$/;
         const expresionRegularBoleta = /^\d{7,14}$/;
-        if(!expresionRegularNombre.test(nombre)){
-            cambiarEdoAlerta(true);
+        if(!expresionRegularNombre.test(nombre)){ 
+            cambiarEdoAlerta(true); 
             cambiarAlerta({
                 tipo: 'error',
                 mensaje:'Ingrese un nombre valido'
@@ -146,54 +179,21 @@ const RegistroUsuarios = () => {
             });
             return;
         }
-        //Guardar los datos en FIREBASE
-        try{
-            await createUserWithEmailAndPassword(auth,email,password);
-            cambiarEdoAlerta(true);
-           cambiarAlerta({
-                tipo:'exito',
-                mensaje:'Registrado exitosamente'
-            });
-             await addDoc(collection(db,'usuarios'),{
-                nombre:nombre,
-                apellidos: apellidos,
-                fechaNacimiento: fechaNac,
-                telefono: telefono,
-                direccion: direccion,
-                boleta: boletaempleado,
-                correo: email,
-                rol: rol   
-            });
-           
-            navigate('/iniciar-sesion');
-            
-        } catch(error){ //Mostrar los errores que puede haber en cada campo
-            cambiarEdoAlerta(true);
-           let mensaje;
-           switch(error.code){
-                case 'auth/invalid-password':
-					mensaje = 'La contraseña tiene que ser de al menos 6 caracteres.'
-					break;
-				case 'auth/email-already-in-use':
-					mensaje = 'Ya existe una cuenta con el correo electrónico proporcionado.'
-				    break;
-				case 'auth/invalid-email':
-					mensaje = 'El correo electrónico no es válido.'
-				    break;
-				default:
-					mensaje = 'Hubo un error al intentar crear la cuenta.'
-				    break;
-           }
-           cambiarAlerta({
-            tipo:'error',
-            mensaje: mensaje
-           });
+        
+        if(registrarse){
+            //Para registrarse
+            registrarUsuario(email,password,rol);
+        } else {
+            //Iniciar sesion
+            signInWithEmailAndPassword(auth,email,password);
+            //navigate('/iniciar-sesion');
         }
-            
     }
-    return ( 
-        <>
-        <Helmet>
+    
+
+return(
+    <>
+       <Helmet>
             <title>Crear Cuenta</title>
         </Helmet>
         <IconoInicio icon={faCircleUser}/>
@@ -271,21 +271,15 @@ const RegistroUsuarios = () => {
                     onChange= {onDropdownChangeRol}
                 />      
             <BotonCentrado>
-                <Boton as="button" type="submit"> Crear Cuenta </Boton> 
+                <Boton as="button" type="submit" onClick={()=>setRegistrarse(!registrarse)}> Crear Cuenta </Boton> 
                 <p> </p>
                 <p></p>
                 <Boton  to='/iniciar-sesion'> Iniciar Sesión </Boton>     
             </BotonCentrado>
         
         </Formulario> 
-        <Alerta 
-            tipo= {alerta.tipo}
-            mensaje= {alerta.mensaje}
-            estadoAlerta={estadoAlerta}
-            cambiarEdoAlerta={cambiarEdoAlerta}
-        />
     </>
-     );
+);
 }
- 
-export default RegistroUsuarios;
+export default Login;
+
