@@ -278,6 +278,12 @@ return(
             </BotonCentrado>
         
         </Formulario> 
+        <Alerta 
+            tipo= {alerta.tipo}
+            mensaje= {alerta.mensaje}
+            estadoAlerta={estadoAlerta}
+            cambiarEdoAlerta={cambiarEdoAlerta}
+        />
     </>
 );
 }
